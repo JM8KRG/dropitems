@@ -35,7 +35,7 @@ class CreateAppTables extends Migration
             $table->unsignedInteger('category_id');
             $table->unsignedInteger('condition_id');
             $table->unsignedTinyInteger('ban_flag')->default(0);
-            $table->dateTime('created_at');
+            $table->dateTime('create_at');
 
             $table->engine = 'InnoDB';
             $table->foreign('category_id')->references('category_id')->on('item_categories');
