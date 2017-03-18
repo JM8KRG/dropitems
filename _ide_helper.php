@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.4.15 on 2017-03-15.
+ * Generated for Laravel 5.4.15 on 2017-03-18.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -1270,7 +1270,7 @@ namespace Illuminate\Support\Facades {
         public static function handle($input, $output = null)
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            return \App\Console\Kernel::handle($input, $output);
+            return \DropItems\Console\Kernel::handle($input, $output);
         }
         
         /**
@@ -1284,7 +1284,7 @@ namespace Illuminate\Support\Facades {
         public static function terminate($input, $status)
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            \App\Console\Kernel::terminate($input, $status);
+            \DropItems\Console\Kernel::terminate($input, $status);
         }
         
         /**
@@ -1298,7 +1298,7 @@ namespace Illuminate\Support\Facades {
         public static function command($signature, $callback)
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            return \App\Console\Kernel::command($signature, $callback);
+            return \DropItems\Console\Kernel::command($signature, $callback);
         }
         
         /**
@@ -1311,7 +1311,7 @@ namespace Illuminate\Support\Facades {
         public static function registerCommand($command)
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            \App\Console\Kernel::registerCommand($command);
+            \DropItems\Console\Kernel::registerCommand($command);
         }
         
         /**
@@ -1326,7 +1326,7 @@ namespace Illuminate\Support\Facades {
         public static function call($command, $parameters = array(), $outputBuffer = null)
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            return \App\Console\Kernel::call($command, $parameters, $outputBuffer);
+            return \DropItems\Console\Kernel::call($command, $parameters, $outputBuffer);
         }
         
         /**
@@ -1340,7 +1340,7 @@ namespace Illuminate\Support\Facades {
         public static function queue($command, $parameters = array())
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            \App\Console\Kernel::queue($command, $parameters);
+            \DropItems\Console\Kernel::queue($command, $parameters);
         }
         
         /**
@@ -1352,7 +1352,7 @@ namespace Illuminate\Support\Facades {
         public static function all()
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            return \App\Console\Kernel::all();
+            return \DropItems\Console\Kernel::all();
         }
         
         /**
@@ -1364,7 +1364,7 @@ namespace Illuminate\Support\Facades {
         public static function output()
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            return \App\Console\Kernel::output();
+            return \DropItems\Console\Kernel::output();
         }
         
         /**
@@ -1376,7 +1376,7 @@ namespace Illuminate\Support\Facades {
         public static function bootstrap()
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            \App\Console\Kernel::bootstrap();
+            \DropItems\Console\Kernel::bootstrap();
         }
         
         /**
@@ -1389,7 +1389,7 @@ namespace Illuminate\Support\Facades {
         public static function setArtisan($artisan)
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            \App\Console\Kernel::setArtisan($artisan);
+            \DropItems\Console\Kernel::setArtisan($artisan);
         }
         
     }         
@@ -1547,7 +1547,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the currently authenticated user.
          *
-         * @return \App\User|null 
+         * @return \DropItems\User|null 
          * @static 
          */
         public static function user()
@@ -1582,7 +1582,7 @@ namespace Illuminate\Support\Facades {
          * Log the given user ID into the application without sessions or cookies.
          *
          * @param mixed $id
-         * @return \App\User|false 
+         * @return \DropItems\User|false 
          * @static 
          */
         public static function onceUsingId($id)
@@ -1646,7 +1646,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param mixed $id
          * @param bool $remember
-         * @return \App\User|false 
+         * @return \DropItems\User|false 
          * @static 
          */
         public static function loginUsingId($id, $remember = false)
@@ -1693,7 +1693,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the last user we attempted to authenticate.
          *
-         * @return \App\User 
+         * @return \DropItems\User 
          * @static 
          */
         public static function getLastAttempted()
@@ -1818,7 +1818,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Return the currently cached user.
          *
-         * @return \App\User|null 
+         * @return \DropItems\User|null 
          * @static 
          */
         public static function getUser()
@@ -1864,7 +1864,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Determine if the current user is authenticated.
          *
-         * @return \App\User 
+         * @return \DropItems\User 
          * @throws \Illuminate\Auth\AuthenticationException
          * @static 
          */
@@ -11878,6 +11878,736 @@ namespace Barryvdh\Debugbar {
     }         
 }
     
+namespace Cartalyst\Sentinel\Laravel\Facades {
+
+    class Activation {
+        
+        /**
+         * {@inheritDoc}
+         *
+         * @static 
+         */
+        public static function create($user)
+        {
+            return \Cartalyst\Sentinel\Activations\IlluminateActivationRepository::create($user);
+        }
+        
+        /**
+         * {@inheritDoc}
+         *
+         * @static 
+         */
+        public static function exists($user, $code = null)
+        {
+            return \Cartalyst\Sentinel\Activations\IlluminateActivationRepository::exists($user, $code);
+        }
+        
+        /**
+         * {@inheritDoc}
+         *
+         * @static 
+         */
+        public static function complete($user, $code)
+        {
+            return \Cartalyst\Sentinel\Activations\IlluminateActivationRepository::complete($user, $code);
+        }
+        
+        /**
+         * {@inheritDoc}
+         *
+         * @static 
+         */
+        public static function completed($user)
+        {
+            return \Cartalyst\Sentinel\Activations\IlluminateActivationRepository::completed($user);
+        }
+        
+        /**
+         * {@inheritDoc}
+         *
+         * @static 
+         */
+        public static function remove($user)
+        {
+            return \Cartalyst\Sentinel\Activations\IlluminateActivationRepository::remove($user);
+        }
+        
+        /**
+         * {@inheritDoc}
+         *
+         * @static 
+         */
+        public static function removeExpired()
+        {
+            return \Cartalyst\Sentinel\Activations\IlluminateActivationRepository::removeExpired();
+        }
+        
+        /**
+         * Create a new instance of the model.
+         *
+         * @param array $data
+         * @return mixed 
+         * @static 
+         */
+        public static function createModel($data = array())
+        {
+            return \Cartalyst\Sentinel\Activations\IlluminateActivationRepository::createModel($data);
+        }
+        
+        /**
+         * Returns the model.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getModel()
+        {
+            return \Cartalyst\Sentinel\Activations\IlluminateActivationRepository::getModel();
+        }
+        
+        /**
+         * Runtime override of the model.
+         *
+         * @param string $model
+         * @return $this 
+         * @static 
+         */
+        public static function setModel($model)
+        {
+            return \Cartalyst\Sentinel\Activations\IlluminateActivationRepository::setModel($model);
+        }
+        
+    }         
+
+    class Reminder {
+        
+        /**
+         * {@inheritDoc}
+         *
+         * @static 
+         */
+        public static function create($user)
+        {
+            return \Cartalyst\Sentinel\Reminders\IlluminateReminderRepository::create($user);
+        }
+        
+        /**
+         * {@inheritDoc}
+         *
+         * @static 
+         */
+        public static function exists($user, $code = null)
+        {
+            return \Cartalyst\Sentinel\Reminders\IlluminateReminderRepository::exists($user, $code);
+        }
+        
+        /**
+         * {@inheritDoc}
+         *
+         * @static 
+         */
+        public static function complete($user, $code, $password)
+        {
+            return \Cartalyst\Sentinel\Reminders\IlluminateReminderRepository::complete($user, $code, $password);
+        }
+        
+        /**
+         * {@inheritDoc}
+         *
+         * @static 
+         */
+        public static function removeExpired()
+        {
+            return \Cartalyst\Sentinel\Reminders\IlluminateReminderRepository::removeExpired();
+        }
+        
+        /**
+         * Create a new instance of the model.
+         *
+         * @param array $data
+         * @return mixed 
+         * @static 
+         */
+        public static function createModel($data = array())
+        {
+            return \Cartalyst\Sentinel\Reminders\IlluminateReminderRepository::createModel($data);
+        }
+        
+        /**
+         * Returns the model.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getModel()
+        {
+            return \Cartalyst\Sentinel\Reminders\IlluminateReminderRepository::getModel();
+        }
+        
+        /**
+         * Runtime override of the model.
+         *
+         * @param string $model
+         * @return $this 
+         * @static 
+         */
+        public static function setModel($model)
+        {
+            return \Cartalyst\Sentinel\Reminders\IlluminateReminderRepository::setModel($model);
+        }
+        
+    }         
+
+    class Sentinel {
+        
+        /**
+         * Registers a user. You may provide a callback to occur before the user
+         * is saved, or provide a true boolean as a shortcut to activation.
+         *
+         * @param array $credentials
+         * @param \Closure|bool $callback
+         * @return \Cartalyst\Sentinel\Users\UserInteface|bool 
+         * @throws \InvalidArgumentException
+         * @static 
+         */
+        public static function register($credentials, $callback = null)
+        {
+            return \Cartalyst\Sentinel\Sentinel::register($credentials, $callback);
+        }
+        
+        /**
+         * Registers and activates the user.
+         *
+         * @param array $credentials
+         * @return \Cartalyst\Sentinel\Users\UserInteface|bool 
+         * @static 
+         */
+        public static function registerAndActivate($credentials)
+        {
+            return \Cartalyst\Sentinel\Sentinel::registerAndActivate($credentials);
+        }
+        
+        /**
+         * Activates the given user.
+         *
+         * @param mixed $user
+         * @return bool 
+         * @throws \InvalidArgumentException
+         * @static 
+         */
+        public static function activate($user)
+        {
+            return \Cartalyst\Sentinel\Sentinel::activate($user);
+        }
+        
+        /**
+         * Checks to see if a user is logged in.
+         *
+         * @return \Cartalyst\Sentinel\Users\UserInterface|bool 
+         * @static 
+         */
+        public static function check()
+        {
+            return \Cartalyst\Sentinel\Sentinel::check();
+        }
+        
+        /**
+         * Checks to see if a user is logged in, bypassing checkpoints
+         *
+         * @return \Cartalyst\Sentinel\Users\UserInterface|bool 
+         * @static 
+         */
+        public static function forceCheck()
+        {
+            return \Cartalyst\Sentinel\Sentinel::forceCheck();
+        }
+        
+        /**
+         * Checks if we are currently a guest.
+         *
+         * @return bool 
+         * @static 
+         */
+        public static function guest()
+        {
+            return \Cartalyst\Sentinel\Sentinel::guest();
+        }
+        
+        /**
+         * Authenticates a user, with "remember" flag.
+         *
+         * @param \Cartalyst\Sentinel\Users\UserInterface|array $credentials
+         * @param bool $remember
+         * @param bool $login
+         * @return \Cartalyst\Sentinel\Users\UserInterface|bool 
+         * @static 
+         */
+        public static function authenticate($credentials, $remember = false, $login = true)
+        {
+            return \Cartalyst\Sentinel\Sentinel::authenticate($credentials, $remember, $login);
+        }
+        
+        /**
+         * Authenticates a user, with the "remember" flag.
+         *
+         * @param \Cartalyst\Sentinel\Users\UserInterface|array $credentials
+         * @return \Cartalyst\Sentinel\Users\UserInterface|bool 
+         * @static 
+         */
+        public static function authenticateAndRemember($credentials)
+        {
+            return \Cartalyst\Sentinel\Sentinel::authenticateAndRemember($credentials);
+        }
+        
+        /**
+         * Forces an authentication to bypass checkpoints.
+         *
+         * @param \Cartalyst\Sentinel\Users\UserInterface|array $credentials
+         * @param bool $remember
+         * @return \Cartalyst\Sentinel\Users\UserInterface|bool 
+         * @static 
+         */
+        public static function forceAuthenticate($credentials, $remember = false)
+        {
+            return \Cartalyst\Sentinel\Sentinel::forceAuthenticate($credentials, $remember);
+        }
+        
+        /**
+         * Forces an authentication to bypass checkpoints, with the "remember" flag.
+         *
+         * @param \Cartalyst\Sentinel\Users\UserInterface|array $credentials
+         * @return \Cartalyst\Sentinel\Users\UserInterface|bool 
+         * @static 
+         */
+        public static function forceAuthenticateAndRemember($credentials)
+        {
+            return \Cartalyst\Sentinel\Sentinel::forceAuthenticateAndRemember($credentials);
+        }
+        
+        /**
+         * Attempt a stateless authentication.
+         *
+         * @param \Cartalyst\Sentinel\Users\UserInterface|array $credentials
+         * @return \Cartalyst\Sentinel\Users\UserInterface|bool 
+         * @static 
+         */
+        public static function stateless($credentials)
+        {
+            return \Cartalyst\Sentinel\Sentinel::stateless($credentials);
+        }
+        
+        /**
+         * Attempt to authenticate using HTTP Basic Auth.
+         *
+         * @return mixed 
+         * @static 
+         */
+        public static function basic()
+        {
+            return \Cartalyst\Sentinel\Sentinel::basic();
+        }
+        
+        /**
+         * Returns the request credentials.
+         *
+         * @return array 
+         * @static 
+         */
+        public static function getRequestCredentials()
+        {
+            return \Cartalyst\Sentinel\Sentinel::getRequestCredentials();
+        }
+        
+        /**
+         * Sets the closure which resolves the request credentials.
+         *
+         * @param \Closure $requestCredentials
+         * @return void 
+         * @static 
+         */
+        public static function setRequestCredentials($requestCredentials)
+        {
+            \Cartalyst\Sentinel\Sentinel::setRequestCredentials($requestCredentials);
+        }
+        
+        /**
+         * Sends a response when HTTP basic authentication fails.
+         *
+         * @return mixed 
+         * @throws \RuntimeException
+         * @static 
+         */
+        public static function getBasicResponse()
+        {
+            return \Cartalyst\Sentinel\Sentinel::getBasicResponse();
+        }
+        
+        /**
+         * Sets the callback which creates a basic response.
+         *
+         * @param \Closure $basicResonse
+         * @return void 
+         * @static 
+         */
+        public static function creatingBasicResponse($basicResponse)
+        {
+            \Cartalyst\Sentinel\Sentinel::creatingBasicResponse($basicResponse);
+        }
+        
+        /**
+         * Persists a login for the given user.
+         *
+         * @param \Cartalyst\Sentinel\Users\UserInterface $user
+         * @param bool $remember
+         * @return \Cartalyst\Sentinel\Users\UserInterface|bool 
+         * @static 
+         */
+        public static function login($user, $remember = false)
+        {
+            return \Cartalyst\Sentinel\Sentinel::login($user, $remember);
+        }
+        
+        /**
+         * Persists a login for the given user, with the "remember" flag.
+         *
+         * @param \Cartalyst\Sentinel\Users\UserInterface $user
+         * @return \Cartalyst\Sentinel\Users\UserInterface|bool 
+         * @static 
+         */
+        public static function loginAndRemember($user)
+        {
+            return \Cartalyst\Sentinel\Sentinel::loginAndRemember($user);
+        }
+        
+        /**
+         * Logs the current user out.
+         *
+         * @param \Cartalyst\Sentinel\Users\UserInterface $user
+         * @param bool $everywhere
+         * @return bool 
+         * @static 
+         */
+        public static function logout($user = null, $everywhere = false)
+        {
+            return \Cartalyst\Sentinel\Sentinel::logout($user, $everywhere);
+        }
+        
+        /**
+         * Pass a closure to Sentinel to bypass checkpoints.
+         *
+         * @param \Closure $callback
+         * @param array $checkpoints
+         * @return mixed 
+         * @static 
+         */
+        public static function bypassCheckpoints($callback, $checkpoints = array())
+        {
+            return \Cartalyst\Sentinel\Sentinel::bypassCheckpoints($callback, $checkpoints);
+        }
+        
+        /**
+         * Checks if checkpoints are enabled.
+         *
+         * @return bool 
+         * @static 
+         */
+        public static function checkpointsStatus()
+        {
+            return \Cartalyst\Sentinel\Sentinel::checkpointsStatus();
+        }
+        
+        /**
+         * Enables checkpoints.
+         *
+         * @return void 
+         * @static 
+         */
+        public static function enableCheckpoints()
+        {
+            \Cartalyst\Sentinel\Sentinel::enableCheckpoints();
+        }
+        
+        /**
+         * Disables checkpoints.
+         *
+         * @return void 
+         * @static 
+         */
+        public static function disableCheckpoints()
+        {
+            \Cartalyst\Sentinel\Sentinel::disableCheckpoints();
+        }
+        
+        /**
+         * Add a new checkpoint to Sentinel.
+         *
+         * @param string $key
+         * @param \Cartalyst\Sentinel\Checkpoints\CheckpointInterface $checkpoint
+         * @return void 
+         * @static 
+         */
+        public static function addCheckpoint($key, $checkpoint)
+        {
+            \Cartalyst\Sentinel\Sentinel::addCheckpoint($key, $checkpoint);
+        }
+        
+        /**
+         * Removes a checkpoint.
+         *
+         * @param string $key
+         * @return void 
+         * @static 
+         */
+        public static function removeCheckpoint($key)
+        {
+            \Cartalyst\Sentinel\Sentinel::removeCheckpoint($key);
+        }
+        
+        /**
+         * Removes the given checkpoints.
+         *
+         * @param array $checkpoints
+         * @return void 
+         * @static 
+         */
+        public static function removeCheckpoints($checkpoints = array())
+        {
+            \Cartalyst\Sentinel\Sentinel::removeCheckpoints($checkpoints);
+        }
+        
+        /**
+         * Returns the currently logged in user, lazily checking for it.
+         *
+         * @param bool $check
+         * @return \Cartalyst\Sentinel\Users\UserInterface 
+         * @static 
+         */
+        public static function getUser($check = true)
+        {
+            return \Cartalyst\Sentinel\Sentinel::getUser($check);
+        }
+        
+        /**
+         * Sets the user associated with Sentinel (does not log in).
+         *
+         * @param \Cartalyst\Sentinel\Users\UserInterface $user
+         * @return void 
+         * @static 
+         */
+        public static function setUser($user)
+        {
+            \Cartalyst\Sentinel\Sentinel::setUser($user);
+        }
+        
+        /**
+         * Returns the user repository.
+         *
+         * @return \Cartalyst\Sentinel\Users\UserRepositoryInterface 
+         * @static 
+         */
+        public static function getUserRepository()
+        {
+            return \Cartalyst\Sentinel\Sentinel::getUserRepository();
+        }
+        
+        /**
+         * Sets the user repository.
+         *
+         * @param \Cartalyst\Sentinel\Users\UserRepositoryInterface $users
+         * @return void 
+         * @static 
+         */
+        public static function setUserRepository($users)
+        {
+            \Cartalyst\Sentinel\Sentinel::setUserRepository($users);
+        }
+        
+        /**
+         * Returns the role repository.
+         *
+         * @return \Cartalyst\Sentinel\Roles\RoleRepositoryInterface 
+         * @static 
+         */
+        public static function getRoleRepository()
+        {
+            return \Cartalyst\Sentinel\Sentinel::getRoleRepository();
+        }
+        
+        /**
+         * Sets the role repository.
+         *
+         * @param \Cartalyst\Sentinel\Roles\RoleRepositoryInterface $roles
+         * @return void 
+         * @static 
+         */
+        public static function setRoleRepository($roles)
+        {
+            \Cartalyst\Sentinel\Sentinel::setRoleRepository($roles);
+        }
+        
+        /**
+         * Returns the persistences repository.
+         *
+         * @return \Cartalyst\Sentinel\Persistences\PersistenceRepositoryInterface 
+         * @static 
+         */
+        public static function getPersistenceRepository()
+        {
+            return \Cartalyst\Sentinel\Sentinel::getPersistenceRepository();
+        }
+        
+        /**
+         * Sets the persistences repository.
+         *
+         * @param \Cartalyst\Sentinel\Persistences\PersistenceRepositoryInterface $persistences
+         * @return void 
+         * @static 
+         */
+        public static function setPersistenceRepository($persistences)
+        {
+            \Cartalyst\Sentinel\Sentinel::setPersistenceRepository($persistences);
+        }
+        
+        /**
+         * Returns the activations repository.
+         *
+         * @return \Cartalyst\Sentinel\Activations\ActivationRepositoryInterface 
+         * @static 
+         */
+        public static function getActivationRepository()
+        {
+            return \Cartalyst\Sentinel\Sentinel::getActivationRepository();
+        }
+        
+        /**
+         * Sets the activations repository.
+         *
+         * @param \Cartalyst\Sentinel\Activations\ActivationRepositoryInterface $activations
+         * @return void 
+         * @static 
+         */
+        public static function setActivationRepository($activations)
+        {
+            \Cartalyst\Sentinel\Sentinel::setActivationRepository($activations);
+        }
+        
+        /**
+         * Returns the reminders repository.
+         *
+         * @return \Cartalyst\Sentinel\Reminders\ReminderRepositoryInterface 
+         * @static 
+         */
+        public static function getReminderRepository()
+        {
+            return \Cartalyst\Sentinel\Sentinel::getReminderRepository();
+        }
+        
+        /**
+         * Sets the reminders repository.
+         *
+         * @param \Cartalyst\Sentinel\Reminders\ReminderRepositoryInterface $reminders
+         * @return void 
+         * @static 
+         */
+        public static function setReminderRepository($reminders)
+        {
+            \Cartalyst\Sentinel\Sentinel::setReminderRepository($reminders);
+        }
+        
+        /**
+         * Returns the throttle repository.
+         *
+         * @return \Cartalyst\Sentinel\Throttling\ThrottleRepositoryInterface 
+         * @static 
+         */
+        public static function getThrottleRepository()
+        {
+            return \Cartalyst\Sentinel\Sentinel::getThrottleRepository();
+        }
+        
+        /**
+         * Sets the throttle repository.
+         *
+         * @param \Cartalyst\Sentinel\Throttling\ThrottleRepositoryInterface $throttle
+         * @return void 
+         * @static 
+         */
+        public static function setThrottleRepository($throttle)
+        {
+            \Cartalyst\Sentinel\Sentinel::setThrottleRepository($throttle);
+        }
+        
+        /**
+         * Returns the event dispatcher.
+         *
+         * @return \Illuminate\Contracts\Events\Dispatcher 
+         * @static 
+         */
+        public static function getDispatcher()
+        {
+            return \Cartalyst\Sentinel\Sentinel::getDispatcher();
+        }
+        
+        /**
+         * Sets the event dispatcher instance.
+         *
+         * @param \Illuminate\Contracts\Events\Dispatcher $dispatcher
+         * @return $this 
+         * @static 
+         */
+        public static function setDispatcher($dispatcher)
+        {
+            return \Cartalyst\Sentinel\Sentinel::setDispatcher($dispatcher);
+        }
+        
+        /**
+         * Returns the event dispatcher status.
+         *
+         * @return bool 
+         * @static 
+         */
+        public static function getDispatcherStatus()
+        {
+            return \Cartalyst\Sentinel\Sentinel::getDispatcherStatus();
+        }
+        
+        /**
+         * Sets the event dispatcher status.
+         *
+         * @param bool $status
+         * @return $this 
+         * @static 
+         */
+        public static function setDispatcherStatus($status)
+        {
+            return \Cartalyst\Sentinel\Sentinel::setDispatcherStatus($status);
+        }
+        
+        /**
+         * Enables the event dispatcher.
+         *
+         * @return $this 
+         * @static 
+         */
+        public static function enableDispatcher()
+        {
+            return \Cartalyst\Sentinel\Sentinel::enableDispatcher();
+        }
+        
+        /**
+         * Disables the event dispatcher.
+         *
+         * @return $this 
+         * @static 
+         */
+        public static function disableDispatcher()
+        {
+            return \Cartalyst\Sentinel\Sentinel::disableDispatcher();
+        }
+        
+    }         
+}
+    
     
 namespace {
 
@@ -13881,6 +14611,12 @@ namespace {
         }
     
     class Debugbar extends \Barryvdh\Debugbar\Facade {}
+    
+    class Activation extends \Cartalyst\Sentinel\Laravel\Facades\Activation {}
+    
+    class Reminder extends \Cartalyst\Sentinel\Laravel\Facades\Reminder {}
+    
+    class Sentinel extends \Cartalyst\Sentinel\Laravel\Facades\Sentinel {}
     
 }
 
