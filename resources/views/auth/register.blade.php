@@ -11,9 +11,10 @@
                     <form class="form-horizontal" action="{{ action('Sentinel\RegisterController@store') }}" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label for="mail" class="col-sm-2 control-label">ユーザー名</label>
+                            <label for="screen_name" class="col-sm-2 control-label">スクリーンネーム</label>
                             <div class="col-sm-10">
-                                <input type="text" name="screen_name" class="form-control" id="" placeholder="ユーザー名">
+                                <input type="text" name="screen_name" class="form-control" id="" placeholder="スクリーンネーム">
+                                <p>英数字、アンダーバー( _ )、ハイフン( - )が使用できます。</p>
                             </div>
                         </div>
                         <div class="form-group">

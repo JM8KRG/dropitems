@@ -39,7 +39,7 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'screen_name'           =>  'required|max:255',
+            'screen_name'           =>  'required|max:16|alpha_dash|unique:users',
             'email'                 =>  'required|max:255|email|unique:users',
             'password'              =>  'required|between:8,255|confirmed',
         ]);

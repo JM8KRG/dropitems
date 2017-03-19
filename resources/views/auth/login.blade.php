@@ -10,9 +10,9 @@
                     <form class="form-horizontal" action="{{ action('Sentinel\LoginController@index') }}" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label for="mail" class="col-sm-2 control-label">メール</label>
+                            <label for="mail" class="col-sm-2 control-label">ID</label>
                             <div class="col-sm-10">
-                                <input type="text" name="id" class="form-control" id="" placeholder="メール">
+                                <input type="text" name="id" class="form-control" id="" placeholder="スクリーンネーム or メールアドレス">
                             </div>
                         </div>
                         <div class="form-group">

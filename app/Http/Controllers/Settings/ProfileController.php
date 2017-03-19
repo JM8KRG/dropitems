@@ -19,6 +19,11 @@ class ProfileController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * index
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $this->user = \Sentinel::getUser();
@@ -31,11 +36,39 @@ class ProfileController extends Controller
         return view('settings.profile',  ['profile' => $profile]);
     }
 
-    public function store(Request $request)
+
+    public function updateScreenName(Request $request)
     {
         // バリデーション
         $validator = \Validator::make($request->all(), [
-            'screen_name'   => 'required|max:16',
+            'screen_name'   => 'required|max:16|alpha_dash|unique:users',
+        ]);
+
+        // 失敗
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors()->getMessages());
+        }
+
+        $this->user = \Sentinel::getUser();
+
+        $credentials = [
+            'screen_name'   => $request->input('screen_name'),
+        ];
+
+        \Sentinel::getUserRepository()->update($this->user, $credentials);
+
+        // 成功
+        return redirect()->back()->with('success', 'スクリーンネームを更新しました。');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateProfile(Request $request)
+    {
+        // バリデーション
+        $validator = \Validator::make($request->all(), [
             'last_name'     => 'max:16',
             'first_name'    => 'max:16',
         ]);
@@ -46,7 +79,6 @@ class ProfileController extends Controller
         }
 
         $credentials = [
-            'screen_name'   => $request->input('screen_name'),
             'last_name'     => $request->input('last_name'),
             'first_name'    => $request->input('first_name'),
         ];
