@@ -29,9 +29,10 @@ Route::get('/', 'HomeController@index');
 
 // プロフィール設定
 Route::get('settings', 'Settings\ProfileController@index');
-Route::post('settings', 'Settings\ProfileController@updateScreenName');
+Route::post('settings/username', 'Settings\ProfileController@updateScreenName');
 Route::post('settings/profile', 'Settings\ProfileController@updateProfile');
 
 // アカウント設定
 Route::get('settings/account', 'Settings\AccountController@index');
-Route::post('settings/account', 'Settings\AccountController@store');
+Route::post('settings/account/email', 'Settings\AccountController@updateEmail');
+Route::post('settings/account/password', 'Settings\AccountController@updatePassword');

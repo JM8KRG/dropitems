@@ -111,5 +111,6 @@ return [
         'password'      =>  'パスワード',
         'first_name'    =>  '姓',
         'last_name'     =>  '名',
+        'old_password'  =>  '現在のパスワード',
     ],
 ];

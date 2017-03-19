@@ -33,6 +33,16 @@ class User extends EloquentUser
     }
 
     /**
+     * ユーザーのメールアドレスを取得する
+     *
+     * @return null|string
+     */
+    public function getUserEmail()
+    {
+        return $this->email;
+    }
+
+    /**
      * ユーザーの名を取得する
      *
      * @return null|string
