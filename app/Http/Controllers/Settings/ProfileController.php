@@ -69,8 +69,8 @@ class ProfileController extends Controller
     {
         // バリデーション
         $validator = \Validator::make($request->all(), [
-            'last_name'     => 'max:16',
-            'first_name'    => 'max:16',
+            'first_name'    => 'required|max:16',
+            'last_name'     => 'required|max:16',
         ]);
 
         // 失敗

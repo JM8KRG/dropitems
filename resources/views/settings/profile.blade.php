@@ -9,7 +9,7 @@
         </div>
 
         <div class="col-sm-9">
-            <div class="page-header" style="margin-top:-15px;padding-bottom:0px;">
+            <div class="page-header" style="margin-top:-5px;padding-bottom:0px;">
                 <h3>プロフィール設定</h3>
             </div>
 

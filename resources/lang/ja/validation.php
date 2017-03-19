@@ -106,8 +106,10 @@ return [
     |
     */
     'attributes' => [
-        'screen_name'   =>   'スクリーンネーム',
-        'email'         => 'メールアドレス',
-        'password'      => 'パスワード',
+        'screen_name'   =>  'スクリーンネーム',
+        'email'         =>  'メールアドレス',
+        'password'      =>  'パスワード',
+        'first_name'    =>  '姓',
+        'last_name'     =>  '名',
     ],
 ];
