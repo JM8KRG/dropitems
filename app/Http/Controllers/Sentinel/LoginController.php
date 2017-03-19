@@ -13,18 +13,27 @@ use DropItems\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {
-    protected $redirectTo = '/';
-
     function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
     }
 
+    /**
+     * Page
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         return view('auth.login');
     }
 
+    /**
+     * Login
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function login(Request $request)
     {
         $validator = \Validator::make($request->all(), [
@@ -46,16 +55,21 @@ class LoginController extends Controller
 
         // 認証成功
         if (Sentinel::check()) {
-            return redirect($this->redirectTo);
+            return redirect()->action('HomeController@index')->with('success', 'ログインに成功しました。');
         }
 
         return redirect()->back()->withErrors('ログインできませんでした。');
     }
 
+    /**
+     * Logout
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function logout()
     {
         Sentinel::logout();
 
-        return redirect($this->redirectTo);
+        return redirect()->action('Sentinel\LoginController@index');
     }
 }

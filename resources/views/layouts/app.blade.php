@@ -37,7 +37,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ \Sentinel::getUser()->getUserLogin() }} <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#"><i class="fa fa-cogs" aria-hidden="true"></i> 設定</a></li>
+                        <li><a href="{{ action('Settings\ProfileController@index') }}"><i class="fa fa-cogs" aria-hidden="true"></i> 設定</a></li>
                         <li class="divider"></li>
                         <li><a href="{{ action('Sentinel\LoginController@logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> ログアウト</a></li>
                         <li class="dropdown-header">ver: 1.00</li>
@@ -47,6 +47,9 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
+
+@include('layouts.success')
+@include('layouts.errors')
 
 @yield('contents')
 

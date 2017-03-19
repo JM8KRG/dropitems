@@ -26,3 +26,11 @@ Route::get('logout', 'Sentinel\LoginController@logout');
 
 // ホーム
 Route::get('/', 'HomeController@index');
+
+// プロフィール設定
+Route::get('settings', 'Settings\ProfileController@index');
+Route::post('settings', 'Settings\ProfileController@store');
+
+// アカウント設定
+Route::get('settings/account', 'Settings\AccountController@index');
+Route::post('settings/account', 'Settings\AccountController@store');

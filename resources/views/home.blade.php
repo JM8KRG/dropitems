@@ -3,9 +3,7 @@
 @section('contents')
 <div class="container">
     <div class="row">
-        <div class="alert alert-success">
-            ログインしました。
-        </div>
+        @include('layouts.success')
     </div>
 </div>
 @endsection

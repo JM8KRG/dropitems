@@ -16,22 +16,28 @@ class ProfileController extends Controller
 
     function  __construct()
     {
-
+        $this->middleware('auth');
     }
 
     public function index()
     {
-        return view('settings.profile');
+        $this->user = \Sentinel::getUser();
+
+        $profile = new \stdClass();
+        $profile->screen_name = $this->user->getUserLogin();
+        $profile->first_name  = $this->user->getUserFirstName();
+        $profile->last_name   = $this->user->getUserLastName();
+
+        return view('settings.profile',  ['profile' => $profile]);
     }
 
     public function store(Request $request)
     {
         // バリデーション
         $validator = \Validator::make($request->all(), [
-            'screen-name'   => 'require|max:8',
-            'last-name'     => 'require|max:16',
-            'first-name'    => 'require|max:16',
-            'free-text'     => 'max:300',
+            'screen_name'   => 'required|max:16',
+            'last_name'     => 'max:16',
+            'first_name'    => 'max:16',
         ]);
 
         // 失敗
@@ -39,7 +45,17 @@ class ProfileController extends Controller
             return redirect()->back()->withErrors($validator->errors()->getMessages());
         }
 
+        $credentials = [
+            'screen_name'   => $request->input('screen_name'),
+            'last_name'     => $request->input('last_name'),
+            'first_name'    => $request->input('first_name'),
+        ];
+
+        $this->user = \Sentinel::getUser();
+
+        \Sentinel::getUserRepository()->update($this->user, $credentials);
+
         // 成功
-        return redirect()->back()->with('success', '登録成功');
+        return redirect()->back()->with('success', 'プロフィールを更新しました。');
     }
 }
