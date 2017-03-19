@@ -16,11 +16,21 @@ class User extends EloquentUser
     ];
 
     /**
-     * Array of login column names.
+     * Array of  nlogin columnames.
      *
      * @var array
      */
-    protected $loginNames = ['screen_name'];
+    protected $loginNames = ['screen_name', 'email'];
+
+    /**
+     * ユーザーのスクリーンネームを取得する
+     *
+     * @return null|string
+     */
+    public function getUserScreenName()
+    {
+        return $this->screen_name;
+    }
 
     /**
      * ユーザーの名を取得する

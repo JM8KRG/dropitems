@@ -4,8 +4,6 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-offset-2 col-sm-8">
-            @include('layouts.errors')
-
             <div class="panel panel-default">
                 <div class="panel-heading">アカウント作成</div>
                 <div class="panel-body">

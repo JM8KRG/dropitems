@@ -26,6 +26,7 @@
         </div>
     </div>
 </nav>
+@include('layouts.errors')
 
 @yield('contents')
 

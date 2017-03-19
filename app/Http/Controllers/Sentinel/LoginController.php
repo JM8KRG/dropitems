@@ -37,7 +37,7 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'email'     => 'required|email',
+            'id'        => 'required',
             'password'  => 'required',
         ]);
 
@@ -46,12 +46,12 @@ class LoginController extends Controller
         }
 
         $credentials = [
-            'email'     => $request->input('email'),
+            'login'     => $request->input('id'),
             'password'  => $request->input('password'),
         ];
 
         // 認証
-        Sentinel::authenticate($credentials);
+        Sentinel::authenticate($credentials, $request->has('remember'));
 
         // 認証成功
         if (Sentinel::check()) {

@@ -4,8 +4,6 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-offset-2 col-sm-8">
-            @include('layouts.errors')
-
             <div class="panel panel-default">
                 <div class="panel-heading">{{ config('app.name') }}にログイン</div>
                 <div class="panel-body">
@@ -14,7 +12,7 @@
                         <div class="form-group">
                             <label for="mail" class="col-sm-2 control-label">メール</label>
                             <div class="col-sm-10">
-                                <input type="text" name="email" class="form-control" id="" placeholder="メール">
+                                <input type="text" name="id" class="form-control" id="" placeholder="メール">
                             </div>
                         </div>
                         <div class="form-group">

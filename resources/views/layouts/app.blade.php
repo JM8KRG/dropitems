@@ -35,7 +35,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ \Sentinel::getUser()->getUserLogin() }} <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ \Sentinel::getUser()->getUserScreenName() }} <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="{{ action('Settings\ProfileController@index') }}"><i class="fa fa-cogs" aria-hidden="true"></i> 設定</a></li>
                         <li class="divider"></li>

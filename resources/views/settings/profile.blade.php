@@ -18,7 +18,7 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="name">スクリーンネーム</label>
-                    <input type="text" name="screen_name" value="{{ $profile->screen_name }}" class="form-control" id="" placeholder="">
+                    <input type="text" name="screen_name" value="{{ $profile->screen_name }}" class="form-control" id="" placeholder="" spellcheck="false">
                 </div>
                 <div class="form-group">
                     <label for="last_name">姓</label>
