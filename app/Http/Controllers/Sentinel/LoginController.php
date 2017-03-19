@@ -36,11 +36,13 @@ class LoginController extends Controller
             return redirect()->back()->withErrors($validator->errors()->getMessages());
         }
 
+        $credentials = [
+            'email'     => $request->input('email'),
+            'password'  => $request->input('password'),
+        ];
+
         // 認証
-        Sentinel::authenticate([
-            $request->input('email'),
-            $request->input('password'),
-        ]);
+        Sentinel::authenticate($credentials);
 
         // 認証成功
         if (Sentinel::check()) {

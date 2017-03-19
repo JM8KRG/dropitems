@@ -25,7 +25,7 @@ class AccountController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->with('error', $validator->errors()->getMessages());
+            return redirect()->back()->withErrors($validator->errors()->getMessages());
         }
     }
 

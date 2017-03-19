@@ -14,15 +14,11 @@ class HomeController extends Controller
 {
     function __construct()
     {
-
+        $this->middleware('auth');
     }
 
     public function index()
     {
-        if (Sentinel::check() === false) {
-            return redirect()->action('Sentinel\LoginController@index');
-        }
-
         return view('home');
     }
 }

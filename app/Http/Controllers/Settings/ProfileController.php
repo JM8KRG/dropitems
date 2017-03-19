@@ -36,7 +36,7 @@ class ProfileController extends Controller
 
         // 失敗
         if ($validator->fails()) {
-            return redirect()->back()->with('error', $validator->errors()->getMessages());
+            return redirect()->back()->withErrors($validator->errors()->getMessages());
         }
 
         // 成功

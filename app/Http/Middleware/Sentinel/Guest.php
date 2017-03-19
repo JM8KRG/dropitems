@@ -1,10 +1,16 @@
 <?php
 
-namespace DropItems\Http\Middleware;
+namespace DropItems\Http\Middleware\Sentinel;
 
 use Closure;
 
-class Sentinel
+
+/**
+ * Class Guest
+ * @package DropItems\Http\Middleware\Sentinel
+ */
+
+class Guest
 {
     /**
      * Handle an incoming request.
@@ -15,9 +21,11 @@ class Sentinel
      */
     public function handle($request, Closure $next)
     {
+        // ログインしていなければ通過
         if (!\Sentinel::check()) {
-            return redirect()->action('Sentinel\LoginController@index');
+            return $next($request);
         }
-        return $next($request);
+
+        return redirect()->action('HomeController@index');
     }
 }
