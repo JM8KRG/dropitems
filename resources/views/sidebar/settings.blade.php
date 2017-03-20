@@ -13,6 +13,6 @@
         <h3 class="panel-title">その他</h3>
     </div>
     <div class="list-group">
-        <a href="#" class="list-group-item">ライセンス情報</a>
+        <a href="{{ url('license') }}" class="list-group-item">ライセンス情報</a>
     </div>
 </div>

@@ -37,6 +37,12 @@ class ProfileController extends Controller
     }
 
 
+    /**
+     * スクリーンネームを更新
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateScreenName(Request $request)
     {
         // バリデーション
@@ -62,6 +68,8 @@ class ProfileController extends Controller
     }
 
     /**
+     * プロフィールを更新
+     *
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */

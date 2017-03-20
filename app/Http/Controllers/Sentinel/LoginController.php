@@ -29,7 +29,7 @@ class LoginController extends Controller
     }
 
     /**
-     * Login
+     * ログイン
      *
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
@@ -62,7 +62,7 @@ class LoginController extends Controller
     }
 
     /**
-     * Logout
+     * ログアウト
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */

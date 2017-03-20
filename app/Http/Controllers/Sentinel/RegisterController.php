@@ -21,7 +21,7 @@ class RegisterController extends Controller
     }
 
     /**
-     * 会員登録ページ
+     * ユーザー登録ページ
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -31,7 +31,7 @@ class RegisterController extends Controller
     }
 
     /**
-     * 会員登録
+     * ユーザー登録
      *
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector

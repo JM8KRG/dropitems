@@ -36,3 +36,8 @@ Route::post('settings/profile', 'Settings\ProfileController@updateProfile');
 Route::get('settings/account', 'Settings\AccountController@index');
 Route::post('settings/account/email', 'Settings\AccountController@updateEmail');
 Route::post('settings/account/password', 'Settings\AccountController@updatePassword');
+
+// ライセンス情報
+Route::get('license', function() {
+    return view('others.license');
+});

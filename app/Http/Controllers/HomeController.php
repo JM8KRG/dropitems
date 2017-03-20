@@ -2,7 +2,6 @@
 
 namespace DropItems\Http\Controllers;
 
-use Sentinel;
 use Illuminate\Http\Request;
 
 /**

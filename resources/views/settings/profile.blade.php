@@ -24,7 +24,6 @@
                         </label>
                     </label>
                     <input type="text" name="screen_name" value="{{ $profile->screen_name }}" class="form-control" id="" placeholder="" spellcheck="false">
-                    <p class="help-block">他の人と同じネームは使えません。</p>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-warning">更新</button>
