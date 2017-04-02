@@ -106,11 +106,15 @@ return [
     |
     */
     'attributes' => [
-        'screen_name'   =>  'スクリーンネーム',
-        'email'         =>  'メールアドレス',
-        'password'      =>  'パスワード',
-        'first_name'    =>  '姓',
-        'last_name'     =>  '名',
-        'old_password'  =>  '現在のパスワード',
+        'screen_name'       =>  'スクリーンネーム',
+        'email'             =>  'メールアドレス',
+        'password'          =>  'パスワード',
+        'first_name'        =>  '姓',
+        'last_name'         =>  '名',
+        'old_password'      =>  '現在のパスワード',
+        'item_name'         =>  'アイテム名',
+        'item_description'  =>  'アイテム説明',
+        'category_id'       =>  'カテゴリー',
+
     ],
 ];

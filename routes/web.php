@@ -37,6 +37,10 @@ Route::get('settings/account', 'Settings\AccountController@index');
 Route::post('settings/account/email', 'Settings\AccountController@updateEmail');
 Route::post('settings/account/password', 'Settings\AccountController@updatePassword');
 
+// アイテムアップロード
+Route::get('upload', 'User\ItemUploader@index');
+Route::post('upload', 'User\ItemUploader@store');
+
 // ライセンス情報
 Route::get('license', function() {
     return view('others.license');

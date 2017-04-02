@@ -16,7 +16,7 @@ class User extends EloquentUser
     ];
 
     /**
-     * Array of  nlogin columnames.
+     * Array of  login column names.
      *
      * @var array
      */

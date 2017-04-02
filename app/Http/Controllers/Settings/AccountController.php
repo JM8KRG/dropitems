@@ -2,6 +2,7 @@
 
 namespace DropItems\Http\Controllers\Settings;
 
+use DropItems\Utils\UserUtil;
 use Illuminate\Http\Request;
 use DropItems\Http\Controllers\Controller;
 
@@ -21,6 +22,8 @@ class AccountController extends Controller
 
     public function index()
     {
+        dd(UserUtil::getUser());
+
         // ユーザーのメールアドレスを取得
         $email = \Sentinel::getUser()->getUserEmail();
 

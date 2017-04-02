@@ -30,8 +30,11 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">カテゴリー <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
                     </ul>
                 </li>
+                <li><a href="{{ action('User\ItemUploader@index') }}">アップロード</a></li>
+                <li><a href="#">チャット</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
