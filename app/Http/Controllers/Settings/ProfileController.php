@@ -30,8 +30,8 @@ class ProfileController extends Controller
 
         $profile = new \stdClass();
         $profile->screen_name = $this->user->getUserLogin();
-        $profile->first_name  = $this->user->getUserFirstName();
-        $profile->last_name   = $this->user->getUserLastName();
+        $profile->first_name  = $this->user->first_name;
+        $profile->last_name   = $this->user->last_name;
 
         return view('settings.profile',  ['profile' => $profile]);
     }
