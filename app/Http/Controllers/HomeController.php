@@ -2,6 +2,7 @@
 
 namespace DropItems\Http\Controllers;
 
+use Cartalyst\Sentinel\Users\UserRepositoryInterface;
 use Illuminate\Http\Request;
 
 /**
