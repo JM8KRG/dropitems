@@ -2,7 +2,6 @@
 
 namespace DropItems\Http\Controllers\Settings;
 
-use DropItems\User;
 use Illuminate\Http\Request;
 use DropItems\Http\Controllers\Controller;
 
