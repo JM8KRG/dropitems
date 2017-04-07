@@ -101,6 +101,8 @@ class AccountController extends Controller
 
     /**
      * パスワードを削除
+     *
+     * @param Request $request
      */
     public function destroy(Request $request)
     {
