@@ -100,7 +100,10 @@ class AccountController extends Controller
         return redirect()->back()->withErrors('パスワードが間違っています。');
     }
 
-    public function destroy()
+    /**
+     * パスワードを削除
+     */
+    public function destroy(Request $request)
     {
 
     }
