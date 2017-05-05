@@ -1,3 +1,15 @@
 body {
     padding-top: 70px;
 }
+
+#my-awesome-dropzone {
+    color: #ccc;
+    height: 200px;
+    width: 100%;
+    margin-bottom: 20px;
+    border-style: dashed;
+    border-width: 2px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 18px;
+}

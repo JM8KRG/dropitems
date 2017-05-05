@@ -2,10 +2,12 @@
 
 namespace DropItems\Models\User;
 
+use DropItems\Models\Contructs\Items\CategoryInterface;
 use DropItems\Models\Contructs\User\UserInterface;
 use DropItems\Models\Contructs\User\UserItemInterface;
 use DropItems\Models\Contructs\User\UserMessageInterface;
 use DropItems\Models\Contructs\User\UserTransactionInterface;
+use DropItems\Models\Items\Category;
 
 /**
  * ユーザーモデル
@@ -23,7 +25,7 @@ class User implements UserInterface
      */
     public function getUserItemInstance()
     {
-        return new UserItem($this);
+        return new UserItem();
     }
 
     /**
@@ -33,7 +35,7 @@ class User implements UserInterface
      */
     public function getUserMessageInstance()
     {
-        return new UserMessage($this);
+        return new UserMessage();
     }
 
     /**
@@ -43,6 +45,16 @@ class User implements UserInterface
      */
     public function getUserTransactionInstance()
     {
-        return new UserTransaction($this);
+        return new UserTransaction();
+    }
+
+    /**
+     * カテゴリーインスタンスを取得する
+     *
+     * @return CategoryInterface
+     */
+    public function getCategoryInstanse()
+    {
+        return new Category();
     }
 }

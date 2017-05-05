@@ -6,6 +6,7 @@ namespace DropItems\Models\Contructs\Items;
  * Interface ItemInterface
  * @package DropItems\Models\Contructs\Items
  */
+
 interface ItemInterface {
 
     /**

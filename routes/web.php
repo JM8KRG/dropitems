@@ -40,6 +40,8 @@ Route::post('settings/account/password', 'Settings\AccountController@updatePassw
 // アイテムアップロード
 Route::get('upload', 'User\ItemUploader@index');
 Route::post('upload', 'User\ItemUploader@store');
+Route::post('upload/images', 'User\ItemUploader@uploadImages');
+
 
 // ライセンス情報
 Route::get('license', function() {

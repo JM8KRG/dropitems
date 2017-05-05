@@ -115,6 +115,6 @@ return [
         'item_name'         =>  'アイテム名',
         'item_description'  =>  'アイテム説明',
         'category_id'       =>  'カテゴリー',
-
+        'condition_id'      =>  'アイテムの状態',
     ],
 ];

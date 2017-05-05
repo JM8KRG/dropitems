@@ -7,7 +7,7 @@ namespace DropItems\Models\Contructs\User;
  * @package DropItems\Models\Contructs\User
  */
 
-interface UserItemInterface UserItemInterface
+interface UserItemInterface
 {
     // 出品中のアイテムを取得
     public function getUserItem($page, $max, $limit);
