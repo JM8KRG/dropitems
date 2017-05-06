@@ -66,7 +66,7 @@ class UserItemController extends Controller
         $result = $this->user->getUserItemInstance()->deleteUserItem($this->user->getUserId(), $item_id);
 
         if (!$result) {
-            \Session::flash('danger', '出品状態の更新に失敗しました。');
+            \Session::flash('danger', 'アイテムの削除に失敗しました。');
 
             return redirect()->action('User\UserItemController@index');
         }

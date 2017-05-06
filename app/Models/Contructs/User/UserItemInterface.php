@@ -28,7 +28,13 @@ interface UserItemInterface
     // 出品情報を更新する
     public function updateUserItem($user_id, $item_id, $item_name, $item_description, $category_id, $item_condition_id);
 
-    // 出品物を削除する
+    /**
+     * ユーザーのアイテムを削除する
+     *
+     * @param $user_id int ユーザID
+     * @param $item_id string アイテムID
+     * @return boolean
+     */
     public function deleteUserItem($user_id, $item_id);
 
     // ユーザーのアイテムリストのページャー

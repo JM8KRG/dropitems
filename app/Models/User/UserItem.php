@@ -250,6 +250,10 @@ class UserItem implements UserItemInterface
             'user_id' => $user_id,
         ]);
 
+        if (!$result1 || !$result2) {
+            return false;
+        }
+
         // 画像削除
         if ($result1[0]->image1) {
             unlink(public_path('storage/images').'/'.$result1[0]->image1);
@@ -259,10 +263,6 @@ class UserItem implements UserItemInterface
         }
         if ($result1[0]->image3) {
             unlink(public_path('storage/images').'/'.$result1[0]->image3);
-        }
-
-        if (!$result1 || !$result2) {
-            return false;
         }
 
         return true;
