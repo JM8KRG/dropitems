@@ -24,29 +24,34 @@ class UserItemController extends Controller
         $page = $request->input('p') != null ? $request->input('p'):1;
 
         // アイテムの件数
-        $total = $this->user->getUserItemInstance()->getUserItemCount();
+        $total = $this->user->getUserItemInstance()->getUserItemCount($this->user->getUserId());
 
         // アイテムを取得
-        $list = $this->user->getUserItemInstance()->getUserItem($page, $total, 2);
+        $list = $this->user->getUserItemInstance()->getUserItem($this->user->getUserId(), $page, $total, 2);
 
         // ページャー
         $pager = $this->user->getUserItemInstance()->getUserItemListPager($page, $total, 2);
 
-        return view('user.items', ['items' => $list, 'pager' => $pager]);
+        return view('item.my_items', ['items' => $list, 'pager' => $pager]);
     }
 
     /**
-     * 出品情報を更新する
+     * 出品状態を更新する
+     *
+     * @param $item_id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request)
+    public function updateItemStatus($item_id)
     {
-        // バリデーション
-        $flag = $this->validate($request, [
-            'item_id'   => 'required|numeric',
-            'item_name' => 'required|max:50',
-        ]);
+        $result = $this->user->getUserItemInstance()->updateUserItemStatus($this->user->getUserId(), $item_id);
 
-        // バリデーションエラー
+        // 更新エラー
+        if (!$result) {
+            \Session::flash('danger', '出品状態の更新に失敗しました。');
 
+            return redirect()->action('User\UserItemController@index');
+        }
+
+        return redirect()->action('User\UserItemController@index');
     }
 }

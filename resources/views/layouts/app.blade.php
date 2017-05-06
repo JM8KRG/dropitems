@@ -34,7 +34,7 @@
                     </ul>
                 </li>
                 <li><a href="{{ action('User\ItemUploader@index') }}">アップロード</a></li>
-                <li><a href="#">チャット</a></li>
+                <li><a href="{{ action('User\UserItemController@index') }}">アイテム管理</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -53,6 +53,12 @@
 
 @include('layouts.success')
 @include('layouts.errors')
+
+@if (Session::has('danger'))
+<div class="container">
+    <div class="alert alert-danger">{{ Session::get('danger') }}</div>
+</div>
+@endif
 
 @yield('contents')
 

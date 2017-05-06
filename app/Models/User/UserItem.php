@@ -17,34 +17,37 @@ class UserItem implements UserItemInterface
     /**
      * ユーザーのアイテムリストを取得する
      *
+     * @param $user_id int ユーザーID
      * @param $page  int 今のページ
      * @param $total int 全行数
      * @param $limit int 表示件数
      * @return array|null
      */
-    public function getUserItem($page, $total, $limit)
+    public function getUserItem($user_id, $page, $total, $limit)
     {
         // 開始位置
         $offset = $limit * ($page-1);
 
-        $result = DB::connection('items')->select('
+        $result = DB::connection('dropitems')->select('
             SELECT items.item_id,
-                   items.item_name,
-                   items.item_description,
+                   items.name,
+                   items.description,
                    items.create_at,
-                   item_images.image1,
-                   item_images.image2,
-                   item_condition.condition,
-                   item_categorys.category_name
+                   items.image1,
+                   items.image2,
+                   items.image3,
+                   item_conditions.condition,
+                   item_categories.category,
+                   items.status
             FROM items
-            INNER JOIN item_condition ON item_condition.condition_id = items.item_condition_id
-            INNER JOIN item_categorys ON item_categorys.category_id = items.category_id
+            INNER JOIN item_conditions ON item_conditions.condition_id = items.condition_id
+            INNER JOIN item_categories ON item_categories.category_id = items.category_id
             WHERE user_id  = :user_id
             ORDER BY items.item_id DESC
             LIMIT :limit
             OFFSET :offset
         ',[
-           'user_id' => \Auth::user()->id,
+           'user_id' => $user_id,
             'limit'  => $limit,
             'offset' => $offset,
         ]);
@@ -101,7 +104,7 @@ class UserItem implements UserItemInterface
     /**
      * アイテムを出品する
      *
-     * @param $user_id string ユーザーID
+     * @param $user_id int ユーザーID
      * @param $item_name string アイテムの名前
      * @param $item_description string アイテムの説明
      * @param $category_id string カテゴリーID
@@ -121,7 +124,7 @@ class UserItem implements UserItemInterface
         // DB接続
         $con = \DB::connection('dropitems');
 
-        // トランザクション
+        // トランザクション開始
         $con->beginTransaction();
 
         // 例外
@@ -196,7 +199,7 @@ class UserItem implements UserItemInterface
      */
     public function updateUserItem($user_id, $item_id, $item_name, $item_description, $category_id, $item_condition_id)
     {
-        DB::connection('mysql')->update('
+        DB::connection('dropitems')->update('
             UPDATE items
             SET item_name          = :item_name,
                 item_description   = :item_discription,
@@ -217,5 +220,75 @@ class UserItem implements UserItemInterface
     public function deleteUserItem($user_id, $item_id)
     {
         // TODO: Implement deleteItem() method.
+    }
+
+    /**
+     * 出品状態を更新する
+     *
+     * @param $user_id int ユーザーID
+     * @param $item_id string アイテムID
+     */
+    public function updateUserItemStatus($user_id, $item_id)
+    {
+        // DB接続
+        $con = \DB::connection('dropitems');
+
+        // status取ってくる
+        $result = $con->select('
+            SELECT 
+              user_id,
+              status
+            FROM items
+            WHERE item_id = :item_id
+        ' ,[
+            'item_id'   => $item_id,
+        ]);
+
+        if (!$result) {
+            return false;
+        }
+
+        // 本人以外の更新を防ぐ
+        if ($result[0]->user_id !== $user_id) {
+            return false;
+        }
+
+        // トランザクション開始
+        $con->beginTransaction();
+
+        // 例外
+        try {
+
+            // 更新
+            $insert = $con->insert('
+                UPDATE items
+                SET status = :status
+                WHERE
+                  item_id = :item_id
+            ', [
+                'status'    => !$result[0]->status,
+                'item_id'   => $item_id,
+            ]);
+
+            if (!$insert) {
+                throw new \Exception('出品状態の更新に失敗');
+            }
+
+        } catch (\Exception $e) {
+
+            // ロールバック
+            $con->rollBack();
+
+            // ログに記録
+            \Log::warning($e->getMessage());
+
+            return false;
+
+        }
+
+        // コミット
+        $con->commit();
+
+        return true;
     }
 }

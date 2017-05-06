@@ -19,7 +19,7 @@ class ItemUploader extends Controller
     }
 
     /**
-     * アップロードページ
+     * 出品画面
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -33,6 +33,12 @@ class ItemUploader extends Controller
         ]);
     }
 
+    /**
+     * 出品する
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
         $validator = \Validator::make($request->all(), [
@@ -69,7 +75,6 @@ class ItemUploader extends Controller
 
         return redirect()->action('User\ItemUploader@index')->with('success', 'アイテムをアップロードしました。');
     }
-
 
     /**
      * 画像アップロード
