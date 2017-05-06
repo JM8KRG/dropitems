@@ -45,6 +45,7 @@ Route::post('upload/images', 'User\ItemUploader@uploadImages');
 // アイテム管理
 Route::get('items/my', 'User\UserItemController@index');
 Route::get('items/status/update/{item_id}', 'User\UserItemController@updateItemStatus');
+Route::get('items/delete/{item_id}', 'User\UserItemController@destroyItem');
 
 // ライセンス情報
 Route::get('license', function() {

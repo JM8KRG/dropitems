@@ -26,11 +26,11 @@
                 </div>
                 <div class="form-group">
                     <label for="condition_id">アイテムの状態</label>
-                    <select name="condition_id" id="" class="form-control">
+                    <select name="condition_id" class="form-control">
                         <option value="">選択してください</option>
-                        <option value="3">非常に良い</option>
+                        <option value="1">非常に良い</option>
                         <option value="2">良い</option>
-                        <option value="1">可</option>
+                        <option value="3">可</option>
                     </select>
                 </div>
                 <div class="form-group">

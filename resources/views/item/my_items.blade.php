@@ -17,6 +17,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                @if(count($items) > 0)
                 @foreach($items as $item)
                     <tr>
                         @if($item->status === 0)
@@ -35,12 +36,24 @@
                             <a href="{{ action('User\UserItemController@updateItemStatus', ['item_id' => $item->item_id]) }}"><i class="fa fa-eye" aria-hidden="true"></i> 表示</a>
                             @endif
                             <b>|</b>
-                            <a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i> 削除</a>
+                            <a href="{{ action('User\UserItemController@destroyItem', ['item_id' => $item->item_id]) }}"><i class="fa fa-trash-o" aria-hidden="true"></i> 削除</a>
                         </td>
                     </tr>
                 @endforeach
+                @else
+                    <tr>
+                        <td colspan="6">アイテムが見つかりません。</td>
+                    </tr>
+                @endif
                 </tbody>
             </table>
+
+            <nav class="pull-right">
+                <ul class="pagination">
+                    {!! $pager !!}
+                </ul>
+            </nav>
+
         </div>
 
     </div>

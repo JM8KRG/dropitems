@@ -217,9 +217,55 @@ class UserItem implements UserItemInterface
         ]);
     }
 
+    /**
+     * ユーザーのアイテムを削除する
+     *
+     * @param $user_id int ユーザID
+     * @param $item_id string アイテムID
+     * @return boolean
+     */
     public function deleteUserItem($user_id, $item_id)
     {
-        // TODO: Implement deleteItem() method.
+        $result1 = \DB::connection('dropitems')->select('
+            SELECT 
+              image1,
+              image2,
+              image3
+            FROM
+              items
+            WHERE
+              item_id = :item_id
+        ', [
+            'item_id'   => $item_id,
+        ]);
+
+        $result2 = \DB::connection('dropitems')->delete('
+          DELETE 
+          FROM items
+          WHERE
+            item_id = :item_id AND 
+            user_id = :user_id
+        ', [
+            'item_id' => $item_id,
+            'user_id' => $user_id,
+        ]);
+
+        // 画像削除
+        if ($result1[0]->image1) {
+            unlink(public_path('storage/images').'/'.$result1[0]->image1);
+        }
+        if ($result1[0]->image2) {
+            unlink(public_path('storage/images').'/'.$result1[0]->image2);
+        }
+        if ($result1[0]->image3) {
+            unlink(public_path('storage/images').'/'.$result1[0]->image3);
+        }
+
+        if (!$result1 || !$result2) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
