@@ -43,9 +43,9 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-block btn-warning btn-lg">
+                    <button id="up-btn" type="submit" class="btn btn-block btn-warning btn-lg">
                         <i class="fa fa-lg fa-cloud-upload"></i>
-                        アップロード
+                        出品する
                     </button>
                 </div>
             </form>
@@ -68,6 +68,7 @@
         acceptedFiles: "image/jpeg,image/png",
         maxFiles: 3,
         parallelUploads: 2,
+
         success: function (file, response) {
             $('form#upload').append('<input type="hidden" name="images[]" value="' + response.name + '">');
         }

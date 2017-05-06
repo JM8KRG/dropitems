@@ -42,6 +42,9 @@ class Category implements CategoryInterface
             return false;
         }
 
+        // コミット
+        $con->commit();
+
         return true;
     }
 

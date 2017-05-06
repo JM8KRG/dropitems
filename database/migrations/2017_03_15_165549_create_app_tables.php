@@ -36,20 +36,13 @@ class CreateAppTables extends Migration
             $table->unsignedInteger('condition_id');
             $table->unsignedTinyInteger('ban_flag')->default(0);
             $table->dateTime('create_at');
+            $table->string('image1', '255');
+            $table->string('image2', '255')->nullable();
+            $table->string('image3', '255')->nullable();
 
             $table->engine = 'InnoDB';
             $table->foreign('category_id')->references('category_id')->on('item_categories');
             $table->foreign('condition_id')->references('condition_id')->on('item_conditions');
-        });
-
-        Schema::create('item_images', function (Blueprint $table) {
-            $table->increments('item_id');
-            $table->string('image1', '255');
-            $table->string('image2', '255');
-            $table->string('image3', '255');
-
-            $table->engine = 'InnoDB';
-            $table->foreign('item_id')->references('item_id')->on('items');
         });
 
         Schema::create('transactions', function (Blueprint $table) {
@@ -73,7 +66,6 @@ class CreateAppTables extends Migration
     public function down()
     {
         Schema::drop('items');
-        Schema::drop('item_images');
         Schema::drop('item_conditions');
         Schema::drop('item_categories');
         Schema::drop('transactions');

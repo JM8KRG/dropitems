@@ -47,9 +47,27 @@ class ItemUploader extends Controller
             return redirect()->back()->withErrors($validator->errors()->getMessages());
         }
 
-        // 画像は存在するか確認
+        $item_name          = $request->input('item_name');
+        $item_description   = $request->input('item_description');
+        $condition_id       = $request->input('condition_id');
+        $category_id        = $request->input('category_id');
+        $images             = $request->input('images');
 
-        dd($request->all());
+        // 画像は存在するか確認
+        foreach ($images as $image) {
+            if (!file_exists(public_path('storage/images/'.$image))) {
+                return redirect()->back()->withErrors('画像が存在しません。');
+            }
+        }
+
+        // DBにアイテム情報を記録
+        $result = $this->user->getUserItemInstance()->registerUserItem($this->user->getUserId(), $item_name, $item_description, $condition_id, $category_id, $images);
+
+        if (!$result) {
+            return redirect()->action('User\ItemUploader@index')->with('danger', 'アップロードに失敗しました。');
+        }
+
+        return redirect()->action('User\ItemUploader@index')->with('success', 'アイテムをアップロードしました。');
     }
 
 

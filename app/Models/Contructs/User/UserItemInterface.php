@@ -10,20 +10,30 @@ namespace DropItems\Models\Contructs\User;
 interface UserItemInterface
 {
     // 出品中のアイテムを取得
-    public function getUserItem($page, $max, $limit);
+    public function getUserItem($item_id, $page, $max, $limit);
 
-    // 出品する
-    public function registerUserItem();
+    /**
+     * アイテムを出品する
+     *
+     * @param $user_id string ユーザーID
+     * @param $item_name string アイテムの名前
+     * @param $item_description string アイテムの説明
+     * @param $category_id string カテゴリーID
+     * @param $category_id string コンディションID
+     * @param $images array アイテムの画像
+     * @return boolean
+     */
+    public function registerUserItem($user_id, $item_name, $item_description, $condition_id, $category_id, $images);
 
     // 出品情報を更新する
-    public function updateUserItem($item_id, $item_name, $item_description, $category_id, $item_condition_id);
+    public function updateUserItem($item_id, $item_id, $item_name, $item_description, $category_id, $item_condition_id);
 
     // 出品物を削除する
-    public function deleteUserItem($item_id);
+    public function deleteUserItem($user_id, $item_id);
 
     // ユーザーのアイテムリストのページャー
     public function getUserItemListPager($page, $total, $limit);
 
     //ユーザーのアイテム出品数
-    public function getUserItemCount();
+    public function getUserItemCount($user_id);
 }

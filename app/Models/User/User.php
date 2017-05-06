@@ -18,6 +18,20 @@ use DropItems\Models\Items\Category;
 
 class User implements UserInterface
 {
+    protected $user;
+
+    /**
+     * ユーザーIDを返却する
+     *
+     * @return int
+     */
+    function getUserId()
+    {
+        $this->user = \Sentinel::getUser();
+
+        return $this->user->getUserId();
+    }
+
     /**
      * ユーザーアイテムインスタンスを取得する
      *
