@@ -26,10 +26,11 @@
                             <tr>
                                 @if($item->status === 0)
                                     <td><span class="label label-success">公開中</span></td>
+                                    <td><a href="{{ action('Items\ItemController@index', ['item_id' => $item->item_id]) }}" target="_blank">{{ $item->name }} <i class="fa fa-window-restore" aria-hidden="true"></i></a></td>
                                 @else
                                     <td><span class="label label-default">非公開</span></td>
+                                    <td>{{ $item->name }}</td>
                                 @endif
-                                <td><a href="{{ action('Items\ItemController@index', ['item_id' => $item->item_id]) }}" target="_blank">{{ $item->name }} <i class="fa fa-window-restore" aria-hidden="true"></i></a></td>
                                 <td>{{ $item->category }}</td>
                                 <td>{{ $item->condition }}</td>
                                 <td>{{ $item->create_at }}</td>

@@ -27,6 +27,7 @@ class Item implements ItemInterface {
             items.image1,
             items.image2,
             items.image3,
+            items.status,
             users.id AS seller_id,
             users.screen_name AS seller_name,
             item_conditions.condition,
