@@ -20,8 +20,12 @@ class ItemController extends Controller
 
     protected $user;
 
-    function __construct(Item $item)
+    function __construct(Item $item, User $user)
     {
+        $this->middleware('auth');
+
+        $this->user = $user;
+
         $this->item = $item;
     }
 
@@ -33,6 +37,8 @@ class ItemController extends Controller
      */
     public function index($item_id)
     {
+        $button = true;
+
         // 特定のアイテムを取得
         $item = $this->item->getItem($item_id);
 
@@ -43,27 +49,25 @@ class ItemController extends Controller
 
         // アイテムが非公開設定
         if($item->status === 1) {
-            return view('item.detail', ['use_button' => false]);
+            $button = false;
         }
 
-        return view('item.detail', ['item' => $item, 'use_button' => true]);
+        // 申し込み状況を確認
+        if ($this->item->isItemTransaction($item_id)) {
+            $button = false;
+        }
+
+        return view('item.detail', ['item' => $item, 'use_button' => $button]);
     }
 
     /**
      * 受け取り申請
      *
      * @param Request $request
-     * @param User $user
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request, User $user)
+    public function store(Request $request)
     {
-        // 認証チェック
-        $this->middleware('auth');
-
-        // ユーザーインスタンスを取得
-        $this->user = $user;
-
         if (is_null($request->item_id)) {
             // エラーメッセージ
             return abort('403', '不正なリクエストです。');
@@ -86,9 +90,30 @@ class ItemController extends Controller
             return redirect()->back();
         }
 
-        // アイテムの受取人を決定する
-        $this->item->setUser($item_id, $this->user->getUserId());
+        // 出品者のIDを取得
+        $seller_id = $this->item->getItem($item_id)->seller_id;
 
-        return dd('メッセージツールへ移動するゾ');
+        // 自己申請
+        if ($seller_id === $this->user->getUserId()) {
+            // エラーメッセージ
+            \Session::flash('danger', '自分で出品したアイテムに受け取り申請はできません。');
+
+            return redirect()->back();
+        }
+
+        // アイテムの受取人を決定する
+        $result = $this->item->setUser($item_id, $seller_id, $this->user->getUserId());
+
+        if (!$result) {
+            // エラーメッセージ
+            \Session::flash('danger', '申請途中にエラーが発生しました。');
+
+            return redirect()->back();
+        }
+
+        dd('ok');
+
+        // メッセージツールへ
+        //return redirect()->action('');
     }
 }

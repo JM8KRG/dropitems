@@ -35,6 +35,7 @@
                 </li>
                 <li><a href="{{ action('User\ItemUploader@index') }}">アップロード</a></li>
                 <li><a href="{{ action('User\UserItemController@index') }}">アイテム管理</a></li>
+                <li><a href="＃">取引履歴</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">

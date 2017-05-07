@@ -38,9 +38,10 @@ interface ItemInterface {
      *
      * @param $item_id
      * @param $seller_id
+     * @param $buyer_id
      * @return bool
      */
-    public function setUser($item_id, $seller_id);
+    public function setUser($item_id, $seller_id, $buyer_id);
 
     // アイテムIDから出品情報を取得する
     public function getItem($item_id);

@@ -2,6 +2,7 @@
 
 namespace DropItems\Http\Controllers\User;
 
+use DropItems\Models\Items\Item;
 use DropItems\Models\User\User;
 use Illuminate\Http\Request;
 use DropItems\Http\Controllers\Controller;
@@ -10,9 +11,15 @@ class UserItemController extends Controller
 {
     protected $user;
 
-    function __construct(User $user)
+    protected $item;
+
+    function __construct(User $user, Item $item)
     {
+        $this->middleware('auth');
+
         $this->user = $user;
+
+        $this->item = $item;
     }
 
     /**
@@ -63,6 +70,13 @@ class UserItemController extends Controller
      */
     public function destroyItem($item_id)
     {
+        // アイテムは取引中か
+        if ($this->item->isItemTransaction($item_id)) {
+            \Session::flash('danger', '取引中のアイテムのため削除できません。');
+
+            return redirect()->action('User\UserItemController@index');
+        }
+
         $result = $this->user->getUserItemInstance()->deleteUserItem($this->user->getUserId(), $item_id);
 
         if (!$result) {

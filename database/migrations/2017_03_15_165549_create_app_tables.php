@@ -51,7 +51,7 @@ class CreateAppTables extends Migration
             $table->unsignedInteger('seller_id');
             $table->unsignedInteger('buyer_id');
             $table->dateTime('create_at');
-            $table->dateTime('completed_at');
+            $table->dateTime('completed_at')->nullable();;
 
             $table->engine = 'InnoDB';
             $table->primary('item_id');

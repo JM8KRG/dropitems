@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/test', function () {
-    return view('home');
-});
-
 // 会員登録
 Route::get('register', 'Sentinel\RegisterController@index');
 Route::post('register', 'Sentinel\RegisterController@store');
@@ -39,6 +35,8 @@ Route::post('settings/account/password', 'Settings\AccountController@updatePassw
 
 // アイテム
 Route::get('items/detail/{item_id}', 'Items\ItemController@index');
+// 受け取り申請
+Route::post('items/order', 'Items\ItemController@store');
 
 // アイテムアップロード
 Route::get('upload', 'User\ItemUploader@index');

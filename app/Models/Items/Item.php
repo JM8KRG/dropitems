@@ -44,7 +44,7 @@ class Item implements ItemInterface {
             'item_id' => $item_id,
         ]);
 
-        if (empty($result)) {
+        if (!$result) {
             return null;
         }
 
@@ -59,11 +59,18 @@ class Item implements ItemInterface {
      */
     public function isItemTransaction($item_id)
     {
-        $result = DB::connection('mysql')->select('SELECT item_id FROM transactions WHERE item_id = :item_id', [
+        $result = DB::connection('mysql')->select('
+            SELECT
+              item_id
+            FROM
+              transactions
+            WHERE
+              item_id = :item_id AND
+              completed_at IS NOT NULL', [
             'item_id' => $item_id,
         ]);
 
-        if (empty($result)) {
+        if (!$result) {
             return false;
         }
 
@@ -75,21 +82,47 @@ class Item implements ItemInterface {
      *
      * @param $item_id
      * @param $seller_id
+     * @param $buyer_id
      * @return bool
      */
-    public function setUser($item_id, $seller_id)
+    public function setUser($item_id, $seller_id, $buyer_id)
     {
-        $result = DB::connection('mysql')->insert('INSERT INTO 
-            transactions (item_id, seller_user_id, buyer_user_id, transaction_at)
-            VALUES (:item_id, :seller_id, :buyer_id, NOW())', [
-                'item_id' => $item_id,
-                'seller_id' => $seller_id,
-                'buyer_id' => \Auth::user()->id,
-        ]);
+        $con = \DB::connection('mysql');
 
-        if (!$result) {
+        $con->beginTransaction();
+
+        try {
+
+            $result = $con->insert('
+              INSERT INTO transactions (
+                item_id,
+                seller_id,
+                buyer_id,
+                create_at
+              ) VALUES (
+                :item_id,
+                :seller_id,
+                :buyer_id,
+                NOW()
+              )', [
+                'item_id'   => $item_id,
+                'seller_id' => $seller_id,
+                'buyer_id'  => $buyer_id,
+            ]);
+
+            if (!$result) {
+                throw new \Exception('申請途中にエラーが発生しました。');
+            }
+
+        } catch (\Exception $e) {
+
+            \Log::warning($e->getMessage());
+
             return false;
+
         }
+
+        $con->commit();
 
         return true;
     }
@@ -119,7 +152,7 @@ class Item implements ItemInterface {
      * @param $limit int 表示数
      * @return array|null
      */
-    public function getItems($limit)
+    public function getItems($limit=10)
     {
         $result = DB::connection('mysql')->select('
             SELECT

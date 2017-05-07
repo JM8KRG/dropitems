@@ -26,9 +26,6 @@ class UserTransaction implements UserTransactionInterface
                    transactions.completed_at
             FROM transactions
             INNER JOIN items USING (item_id)
-            INNER JOIN item_images USING (item_id)
-            INNER JOIN users seller ON seller.id = transactions.seller_user_id
-            INNER JOIN users buyer ON buyer.id = transactions.buyer_user_id
             WHERE buyer_user_id = :buyer_id', [
                 'buyer_id' => \Auth::user()->id,
         ]);
