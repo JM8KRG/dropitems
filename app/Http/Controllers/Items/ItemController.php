@@ -29,11 +29,11 @@ class ItemController extends Controller
         $item = $this->item->getItem($item_id);
 
         // 情報なし
-        if (empty($item)) {
-            return view('items.item_404');
+        if (!$item) {
+            return view('item.item_404');
         }
 
-        return view('items.item', ['item' => $item]);
+        return view('item.detail', ['item' => $item]);
     }
 
     // 申し込む

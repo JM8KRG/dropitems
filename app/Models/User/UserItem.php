@@ -28,7 +28,7 @@ class UserItem implements UserItemInterface
         // 開始位置
         $offset = $limit * ($page-1);
 
-        $result = DB::connection('dropitems')->select('
+        $result = DB::connection('mysql')->select('
             SELECT items.item_id,
                    items.name,
                    items.description,
@@ -92,7 +92,7 @@ class UserItem implements UserItemInterface
      */
     public function getUserItemCount($user_id)
     {
-        $result = DB::connection('dropitems')->selectOne('SELECT COUNT(*) AS count FROM items WHERE user_id = :user_id', ['user_id' => $user_id]);
+        $result = DB::connection('mysql')->selectOne('SELECT COUNT(*) AS count FROM items WHERE user_id = :user_id', ['user_id' => $user_id]);
 
         if (empty($result)) {
             return 0;
@@ -122,7 +122,7 @@ class UserItem implements UserItemInterface
         }
 
         // DB接続
-        $con = \DB::connection('dropitems');
+        $con = \DB::connection('mysql');
 
         // トランザクション開始
         $con->beginTransaction();
@@ -226,7 +226,7 @@ class UserItem implements UserItemInterface
      */
     public function deleteUserItem($user_id, $item_id)
     {
-        $result1 = \DB::connection('dropitems')->select('
+        $result1 = \DB::connection('mysql')->select('
             SELECT 
               image1,
               image2,
@@ -239,7 +239,7 @@ class UserItem implements UserItemInterface
             'item_id'   => $item_id,
         ]);
 
-        $result2 = \DB::connection('dropitems')->delete('
+        $result2 = \DB::connection('mysql')->delete('
           DELETE 
           FROM items
           WHERE
@@ -277,7 +277,7 @@ class UserItem implements UserItemInterface
     public function updateUserItemStatus($user_id, $item_id)
     {
         // DB接続
-        $con = \DB::connection('dropitems');
+        $con = \DB::connection('mysql');
 
         // status取ってくる
         $result = $con->select('

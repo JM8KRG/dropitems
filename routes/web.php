@@ -37,6 +37,9 @@ Route::get('settings/account', 'Settings\AccountController@index');
 Route::post('settings/account/email', 'Settings\AccountController@updateEmail');
 Route::post('settings/account/password', 'Settings\AccountController@updatePassword');
 
+// アイテム
+Route::get('items/detail/{item_id}', 'Items\ItemController@index');
+
 // アイテムアップロード
 Route::get('upload', 'User\ItemUploader@index');
 Route::post('upload', 'User\ItemUploader@store');
@@ -44,7 +47,7 @@ Route::post('upload/images', 'User\ItemUploader@uploadImages');
 
 // アイテム管理
 Route::get('items/my', 'User\UserItemController@index');
-Route::get('items/status/update/{item_id}', 'User\UserItemController@updateItemStatus');
+Route::get('items/update/status/{item_id}', 'User\UserItemController@updateItemStatus');
 Route::get('items/delete/{item_id}', 'User\UserItemController@destroyItem');
 
 // ライセンス情報

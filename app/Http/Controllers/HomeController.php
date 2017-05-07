@@ -2,7 +2,7 @@
 
 namespace DropItems\Http\Controllers;
 
-use Cartalyst\Sentinel\Users\UserRepositoryInterface;
+use DropItems\Models\Items\Item;
 use Illuminate\Http\Request;
 
 /**
@@ -12,13 +12,20 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    function __construct()
+    protected $item;
+
+    function __construct(Item $item)
     {
         $this->middleware('auth');
+
+        $this->item = $item;
     }
 
     public function index()
     {
-        return view('home');
+        // アイテムを取得する
+        $items_list = $this->item->getItems(10);
+
+        return view('home', ['items' => $items_list]);
     }
 }

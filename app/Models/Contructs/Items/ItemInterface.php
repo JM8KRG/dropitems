@@ -10,6 +10,14 @@ namespace DropItems\Models\Contructs\Items;
 interface ItemInterface {
 
     /**
+     * アイテムリストを取得する
+     *
+     * @param $limit int 表示数
+     * @return array|null
+     */
+    public function getItems($limit);
+
+    /**
      * アイテムは存在するか
      *
      * @param item_id

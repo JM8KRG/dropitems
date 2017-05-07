@@ -21,22 +21,21 @@ class Item implements ItemInterface {
     {
         $result = DB::connection('mysql')->select('
             SELECT items.item_id,
-            items.item_name,
-            items.item_description,
+            items.name,
+            items.description,
             items.create_at,
-            item_images.image1,
-            item_images.image2,
-            item_images.image3,
+            items.image1,
+            items.image2,
+            items.image3,
             users.id AS seller_id,
-            users.name AS seller_name,
-            item_condition.condition,
-            item_categorys.category_name,
-            transactions.transaction_at
+            users.screen_name AS seller_name,
+            item_conditions.condition,
+            item_categories.category,
+            items.create_at
             FROM items
-            INNER JOIN item_images USING (item_id)
             INNER JOIN users ON users.id = items.user_id
-            INNER JOIN item_condition ON item_condition.condition_id = items.item_condition_id
-            INNER JOIN item_categorys ON item_categorys.category_id = items.category_id
+            INNER JOIN item_conditions ON item_conditions.condition_id = items.condition_id
+            INNER JOIN item_categories ON item_categories.category_id = items.category_id
             LEFT OUTER JOIN transactions USING (item_id)
 
             WHERE item_id = :item_id
@@ -111,5 +110,32 @@ class Item implements ItemInterface {
         }
 
         return true;
+    }
+
+    /**
+     * アイテムリストを取得する
+     *
+     * @param $limit int 表示数
+     * @return array|null
+     */
+    public function getItems($limit)
+    {
+        $result = DB::connection('mysql')->select('
+            SELECT
+              *
+            FROM
+              items
+            WHERE status = 0
+            ORDER BY item_id DESC
+            LIMIT :limit
+        ', [
+            'limit' => $limit
+        ]);
+
+        if (!$result) {
+            return null;
+        }
+
+        return $result;
     }
 }

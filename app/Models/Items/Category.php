@@ -15,7 +15,7 @@ class Category implements CategoryInterface
     public function saveCategory($category_name)
     {
         // DB接続
-        $con = \DB::connection('dropitems');
+        $con = \DB::connection('mysql');
 
         // トランザクション開始
         $con->beginTransaction();
@@ -55,7 +55,7 @@ class Category implements CategoryInterface
      */
     public function getCategories()
     {
-        $result = \DB::connection('dropitems')->select('
+        $result = \DB::connection('mysql')->select('
             SELECT *
             FROM item_categories
         ');
