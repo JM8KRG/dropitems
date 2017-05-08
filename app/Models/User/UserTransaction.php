@@ -10,24 +10,26 @@ class UserTransaction implements UserTransactionInterface
     /**
      * 取引リストを取得
      *
+     * @param $user_id int ユーザーID
      * @return null|\stdClass
      */
-    public function getUserTransaction()
+    public function getUserTransaction($user_id)
     {
         $result = DB::connection('mysql')->select('
-            SELECT items.item_id,
-                   items.item_name,
-                   item_images.image1,
-                   seller.id AS seller_id,
-                   seller.name AS seller_name,
-                   buyer.name AS buyer_name,
-                   transactions.transaction_id,
-                   transactions.transaction_at,
-                   transactions.completed_at
+            SELECT
+              items.item_id,
+              items.name,
+              users.screen_name AS buyer_name,
+              transactions.create_at,
+              transactions.completed_at
             FROM transactions
             INNER JOIN items USING (item_id)
-            WHERE buyer_user_id = :buyer_id', [
-                'buyer_id' => \Auth::user()->id,
+            INNER JOIN users
+              ON transactions.buyer_id = users.id
+            WHERE 
+              transactions.seller_id = :user_id
+        ', [
+                'user_id' => $user_id,
         ]);
 
         // 結果なし

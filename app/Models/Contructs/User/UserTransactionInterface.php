@@ -7,6 +7,11 @@ namespace DropItems\Models\Contructs\User;
  * @package DropItems\Models\Contructs\User
  */
 interface UserTransactionInterface {
-    // 取引リストを取得
-    public function getUserTransaction();
+    /**
+     * 取引リストを取得
+     *
+     * @param $user_id int ユーザーID
+     * @return mixed
+     */
+    public function getUserTransaction($user_id);
 }

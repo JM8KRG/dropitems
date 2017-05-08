@@ -48,6 +48,13 @@ Route::get('items/my', 'User\UserItemController@index');
 Route::get('items/update/status/{item_id}', 'User\UserItemController@updateItemStatus');
 Route::get('items/delete/{item_id}', 'User\UserItemController@destroyItem');
 
+// 取引履歴
+Route::get('trade', 'User\UserTransactionController@index');
+
+// 取引メッセージ
+Route::get('messages/t/{item_id}', 'User\UserMessageController@index');
+Route::post('messages/update', 'User\UserMessageController@store');
+
 // ライセンス情報
 Route::get('license', function() {
     return view('others.license');

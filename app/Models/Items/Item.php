@@ -65,8 +65,8 @@ class Item implements ItemInterface {
             FROM
               transactions
             WHERE
-              item_id = :item_id AND
-              completed_at IS NOT NULL', [
+              item_id = :item_id
+        ', [
             'item_id' => $item_id,
         ]);
 

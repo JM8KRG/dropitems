@@ -24,9 +24,9 @@ class UserTransactionController extends Controller
 
     public function index()
     {
-        // 取引履歴を取得
-        $transactions = $this->user->getUserTransactionInstance()->getUserTransaction();
+        // 取引情報を取得
+        $transactions = $this->user->getUserTransactionInstance()->getUserTransaction($this->user->getUserId());
 
-        return view('user.transaction', ['transactions' => $transactions]);
+        return view('item.transactions', ['transactions' => $transactions]);
     }
 }

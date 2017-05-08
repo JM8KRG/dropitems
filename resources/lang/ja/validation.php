@@ -116,6 +116,7 @@ return [
         'item_description'  =>  'アイテム説明',
         'category_id'       =>  'カテゴリー',
         'condition_id'      =>  'アイテムの状態',
-        'images'            =>  '画像'
+        'images'            =>  '画像',
+        'message'           =>  'メッセージ',
     ],
 ];
