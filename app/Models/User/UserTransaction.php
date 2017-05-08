@@ -27,9 +27,11 @@ class UserTransaction implements UserTransactionInterface
             INNER JOIN users
               ON transactions.buyer_id = users.id
             WHERE 
-              transactions.seller_id = :user_id
+              transactions.seller_id = :seller_id OR 
+              transactions.buyer_id = :buyer_id
         ', [
-                'user_id' => $user_id,
+                'seller_id' => $user_id,
+                'buyer_id' => $user_id,
         ]);
 
         // 結果なし
