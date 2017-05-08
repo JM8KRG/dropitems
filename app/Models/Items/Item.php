@@ -156,10 +156,16 @@ class Item implements ItemInterface {
     {
         $result = DB::connection('mysql')->select('
             SELECT
-              *
+              items.item_id,
+              items.name,
+              items.description,
+              items.image1
             FROM
               items
-            WHERE status = 0
+              LEFT JOIN transactions
+              USING (item_id)
+            WHERE status = 0 AND
+              transactions.create_at IS NULL
             ORDER BY item_id DESC
             LIMIT :limit
         ', [

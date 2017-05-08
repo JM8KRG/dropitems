@@ -10,7 +10,7 @@
                 <input type="hidden" name="item_id" value="{{ $item_id }}">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        「{{ $item_name }}」の取引メッセージ作成
+                        「{{ $item_name }}」の取引メッセージを作成
                     </div>
                     <div class="panel-body">
                         <input type="text" class="form-control" name="message" value="">

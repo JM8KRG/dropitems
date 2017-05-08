@@ -111,9 +111,7 @@ class ItemController extends Controller
             return redirect()->back();
         }
 
-        dd('ok');
-
         // メッセージツールへ
-        //return redirect()->action('');
+        return redirect()->action('User\UserMessageController@index', ['item_id' => $item_id]);
     }
 }
