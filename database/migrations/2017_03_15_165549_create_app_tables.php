@@ -51,11 +51,21 @@ class CreateAppTables extends Migration
             $table->unsignedInteger('seller_id');
             $table->unsignedInteger('buyer_id');
             $table->dateTime('create_at');
-            $table->dateTime('completed_at')->nullable();;
+            $table->dateTime('completed_at')->nullable();
 
             $table->engine = 'InnoDB';
             $table->primary('item_id');
             $table->foreign('item_id')->references('item_id')->on('items');
+        });
+
+        Schema::create('trade_messages', function (Blueprint $table) {
+            $table->increments('message_id');
+            $table->unsignedInteger('item_id');
+            $table->unsignedInteger('send_user_id');
+            $table->string('message', '500');
+            $table->dateTime('create_at');
+
+            $table->engine = 'InnoDB';
         });
     }
 

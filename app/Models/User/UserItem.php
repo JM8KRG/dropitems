@@ -29,23 +29,27 @@ class UserItem implements UserItemInterface
         $offset = $limit * ($page-1);
 
         $result = DB::connection('mysql')->select('
-            SELECT items.item_id,
-                   items.name,
-                   items.description,
-                   items.create_at,
-                   items.image1,
-                   items.image2,
-                   items.image3,
-                   item_conditions.condition,
-                   item_categories.category,
-                   items.status
+            SELECT 
+              items.item_id,
+              items.name,
+              items.description,
+              items.create_at,
+              items.image1,
+              items.image2,
+              items.image3,
+              item_conditions.condition,
+              item_categories.category,
+              items.status
             FROM items
             INNER JOIN item_conditions ON item_conditions.condition_id = items.condition_id
             INNER JOIN item_categories ON item_categories.category_id = items.category_id
-            WHERE user_id  = :user_id
+            WHERE
+              user_id  = :user_id AND 
+              status = 0 OR 
+              status = 1
             ORDER BY items.item_id DESC
-            LIMIT :limit
-            OFFSET :offset
+              LIMIT :limit
+              OFFSET :offset
         ',[
            'user_id' => $user_id,
             'limit'  => $limit,
@@ -226,8 +230,11 @@ class UserItem implements UserItemInterface
      */
     public function deleteUserItem($user_id, $item_id)
     {
-        $result1 = \DB::connection('mysql')->select('
+        $con = \DB::connection('mysql');
+
+        $result = $con->select('
             SELECT 
+              user_id,
               image1,
               image2,
               image3
@@ -239,31 +246,67 @@ class UserItem implements UserItemInterface
             'item_id'   => $item_id,
         ]);
 
-        $result2 = \DB::connection('mysql')->delete('
-          DELETE 
-          FROM items
-          WHERE
-            item_id = :item_id AND 
-            user_id = :user_id
-        ', [
-            'item_id' => $item_id,
-            'user_id' => $user_id,
-        ]);
-
-        if (!$result1 || !$result2) {
+        if (!$result) {
             return false;
         }
 
+//        $result2 = \DB::connection('mysql')->update('
+//          DELETE
+//          FROM items
+//          WHERE
+//            item_id = :item_id AND
+//            user_id = :user_id
+//        ', [
+//            'item_id' => $item_id,
+//            'user_id' => $user_id,
+//        ]);
+
+        // トランザクション開始
+        $con->beginTransaction();
+
+        // 例外
+        try {
+
+            // 更新
+            $insert = $con->insert('
+                UPDATE items
+                SET status = :status
+                WHERE
+                  item_id = :item_id
+            ', [
+                'status'    => 2, // softDelete
+                'item_id'   => $item_id,
+            ]);
+
+            if (!$insert) {
+                throw new \Exception('出品状態の更新に失敗');
+            }
+
+        } catch (\Exception $e) {
+
+            // ロールバック
+            $con->rollBack();
+
+            // ログに記録
+            \Log::warning($e->getMessage());
+
+            return false;
+
+        }
+
         // 画像削除
-        if ($result1[0]->image1) {
-            unlink(public_path('storage/images').'/'.$result1[0]->image1);
+        if ($result[0]->image1) {
+            unlink(public_path('storage/images').'/'.$result[0]->image1);
         }
-        if ($result1[0]->image2) {
-            unlink(public_path('storage/images').'/'.$result1[0]->image2);
+        if ($result[0]->image2) {
+            unlink(public_path('storage/images').'/'.$result[0]->image2);
         }
-        if ($result1[0]->image3) {
-            unlink(public_path('storage/images').'/'.$result1[0]->image3);
+        if ($result[0]->image3) {
+            unlink(public_path('storage/images').'/'.$result[0]->image3);
         }
+
+        // コミット
+        $con->commit();
 
         return true;
     }
