@@ -10,3 +10,4 @@ Homestead.yaml
 .DS_Store
 .phpstorm.meta.php
 _ide_helper.php
+.env.production

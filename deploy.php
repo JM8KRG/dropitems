@@ -9,7 +9,7 @@ set('ssh_multiplexing', true);
 
 set('repository', 'https://turtle.do-johodai.ac.jp/gitea/s1512073/dropitems.git');
 
-add('shared_files', ['.env']);
+add('shared_files', []);
 add('shared_dirs', []);
 
 add('writable_dirs', []);
@@ -22,6 +22,14 @@ server('production', '192.168.1.9', 22)
     ->set('deploy_path', '/home/nishi/nginx/html/dropitems')
     ->pty(true);
 
+/**
+ * Upload .env.production file as .env
+ */
+task('deploy:upload', function() {
+    upload('.env.production', '/home/nishi/nginx/html/dropitems/shared/.env');
+});
+
+before('deploy', 'deploy:upload');
 
 // Tasks
 

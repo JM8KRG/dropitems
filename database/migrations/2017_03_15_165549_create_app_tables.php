@@ -39,7 +39,7 @@ class CreateAppTables extends Migration
             $table->string('image1', '255');
             $table->string('image2', '255')->nullable();
             $table->string('image3', '255')->nullable();
-            $table->unsignedInteger('buyer_id', 1)->default(0);
+            $table->unsignedInteger('status')->default(0);
 
             $table->engine = 'InnoDB';
             $table->foreign('category_id')->references('category_id')->on('item_categories');
