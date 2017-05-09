@@ -27,6 +27,7 @@ server('production', '192.168.1.9', 22)
  */
 task('deploy:upload', function() {
     upload('.env.production', '/home/nishi/nginx/html/dropitems/shared/.env');
+    run('php key:gen');
 });
 
 before('deploy', 'deploy:upload');
