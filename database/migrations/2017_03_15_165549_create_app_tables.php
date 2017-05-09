@@ -80,5 +80,7 @@ class CreateAppTables extends Migration
         Schema::drop('item_conditions');
         Schema::drop('item_categories');
         Schema::drop('transactions');
+        Schema::drop('trade_messages');
+
     }
 }
