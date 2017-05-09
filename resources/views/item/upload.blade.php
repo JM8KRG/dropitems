@@ -59,7 +59,7 @@
 <script>
     Dropzone.autoDiscover = false;
     var myDropzone = new Dropzone("div#my-awesome-dropzone", {
-        url:"dropitems//upload/images",
+        url:"/dropitems/upload/images",
         params: {
             _token: $('input[name="_token"]').val()
         },
