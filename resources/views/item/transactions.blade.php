@@ -17,6 +17,7 @@
                             <tr>
                                 <th>アイテム名</th>
                                 <th>メッセージ</th>
+                                <th>操作</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -25,6 +26,7 @@
                             <tr>
                                 <td>{{ $transaction->name }}</td>
                                 <td><a href="{{ action('User\UserMessageController@index', ['item_id' => $transaction->item_id]) }}">詳細</a></td>
+                                <td><a href="{{ action('User\UserTransactionController@closeTrade', ['item_id' => $transaction->item_id]) }}">取引を完了する</a></td>
                             </tr>
                             @endforeach
                         @else

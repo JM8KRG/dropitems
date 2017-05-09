@@ -43,8 +43,10 @@ class UserItem implements UserItemInterface
             FROM items
             INNER JOIN item_conditions ON item_conditions.condition_id = items.condition_id
             INNER JOIN item_categories ON item_categories.category_id = items.category_id
+            LEFT OUTER JOIN transactions USING (item_id)
             WHERE
-              user_id  = :user_id AND 
+              user_id  = :user_id AND
+              transactions.completed_at IS NULL AND
               status = 0 OR 
               status = 1
             ORDER BY items.item_id DESC
@@ -222,7 +224,7 @@ class UserItem implements UserItemInterface
     }
 
     /**
-     * ユーザーのアイテムを削除する
+     * ユーザーのアイテムを論理削除する
      *
      * @param $user_id int ユーザID
      * @param $item_id string アイテムID
@@ -295,15 +297,15 @@ class UserItem implements UserItemInterface
         }
 
         // 画像削除
-        if ($result[0]->image1) {
-            unlink(public_path('storage/images').'/'.$result[0]->image1);
-        }
-        if ($result[0]->image2) {
-            unlink(public_path('storage/images').'/'.$result[0]->image2);
-        }
-        if ($result[0]->image3) {
-            unlink(public_path('storage/images').'/'.$result[0]->image3);
-        }
+//        if ($result[0]->image1) {
+//            unlink(public_path('storage/images').'/'.$result[0]->image1);
+//        }
+//        if ($result[0]->image2) {
+//            unlink(public_path('storage/images').'/'.$result[0]->image2);
+//        }
+//        if ($result[0]->image3) {
+//            unlink(public_path('storage/images').'/'.$result[0]->image3);
+//        }
 
         // コミット
         $con->commit();

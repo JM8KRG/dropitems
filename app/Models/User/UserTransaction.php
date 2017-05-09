@@ -51,4 +51,49 @@ class UserTransaction implements UserTransactionInterface
 
         return $transactions;
     }
+
+    /**
+     * 取引を完了する
+     *
+     * @param $item_id
+     * @param $seller_id
+     * @return boolean
+     */
+    public function closeUserTransaction($item_id, $seller_id)
+    {
+        $con = DB::connection('mysql');
+
+        $con->beginTransaction();
+
+        try {
+
+            $result = $con->update('
+                UPDATE transactions
+                SET completed_at = NOW()
+                WHERE 
+                  item_id = :item_id AND
+                  seller_id = :user_id
+            ', [
+                'item_id'   => $item_id,
+                'user_id'   => $seller_id,
+            ]);
+
+            if (!$result) {
+                throw new \Exception('完了処理に失敗しました。');
+            }
+
+        } catch (\Exception $exception) {
+
+            $con->rollBack();
+
+            \Log::warning($exception->getMessage());
+
+            return false;
+
+        }
+
+        $con->commit();
+
+        return true;
+    }
 }

@@ -48,8 +48,9 @@ Route::get('items/my', 'User\UserItemController@index');
 Route::get('items/update/status/{item_id}', 'User\UserItemController@updateItemStatus');
 Route::get('items/delete/{item_id}', 'User\UserItemController@destroyItem');
 
-// 取引履歴
+// 取引管理
 Route::get('trade', 'User\UserTransactionController@index');
+Route::get('trade/close/{item_id}', 'User\UserTransactionController@closeTrade');
 
 // 取引メッセージ
 Route::get('messages/t/{item_id}', 'User\UserMessageController@index');

@@ -14,4 +14,13 @@ interface UserTransactionInterface {
      * @return mixed
      */
     public function getUserTransaction($user_id);
+
+    /**
+     * 取引を完了する
+     *
+     * @param $item_id
+     * @param $seller_id
+     * @return boolean
+     */
+    public function closeUserTransaction($item_id, $seller_id);
 }
