@@ -47,8 +47,8 @@ class UserItem implements UserItemInterface
             WHERE
               user_id  = :user_id AND
               transactions.completed_at IS NULL AND
-              status = 0 OR 
-              status = 1
+              (status = 0 OR 
+              status = 1)
             ORDER BY items.item_id DESC
               LIMIT :limit
               OFFSET :offset
