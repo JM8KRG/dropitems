@@ -16,7 +16,7 @@ add('writable_dirs', []);
 
 // Servers
 
-server('production', '192.168.1.9', 22)
+server('production', 'airn.dip.jp', 22)
     ->user('nishi')
     ->identityFile()
     ->set('deploy_path', '/home/nishi/nginx/html/dropitems')
@@ -25,11 +25,11 @@ server('production', '192.168.1.9', 22)
 /**
  * Upload .env.production file as .env
  */
-task('deploy:upload', function() {
-    upload('.env.production', '/home/nishi/nginx/html/dropitems/shared/.env');
-});
-
-before('deploy', 'deploy:upload');
+//task('deploy:upload', function() {
+//    upload('.env.production', '/home/nishi/nginx/html/dropitems/shared/.env');
+//});
+//
+//before('deploy', 'deploy:upload');
 
 // Tasks
 

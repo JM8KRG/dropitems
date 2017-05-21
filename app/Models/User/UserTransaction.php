@@ -20,15 +20,24 @@ class UserTransaction implements UserTransactionInterface
               items.item_id,
               items.name,
               users.screen_name AS buyer_name,
+              trade_messages.message,
               transactions.create_at,
               transactions.completed_at
+            
             FROM transactions
+            
             INNER JOIN items USING (item_id)
+            
             INNER JOIN users
               ON transactions.buyer_id = users.id
+              
+            LEFT JOIN trade_messages
+              ON transactions.item_id = trade_messages.item_id AND 
+              trade_messages.message_id = (SELECT MAX(message_id) FROM trade_messages WHERE item_id = transactions.item_id)
+            
             WHERE 
-              transactions.seller_id = :seller_id OR 
-              transactions.buyer_id = :buyer_id
+              (transactions.seller_id = :seller_id OR 
+              transactions.buyer_id = :buyer_id)
         ', [
                 'seller_id' => $user_id,
                 'buyer_id' => $user_id,

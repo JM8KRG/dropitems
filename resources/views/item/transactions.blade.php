@@ -25,7 +25,7 @@
                             @foreach($transactions->trading as $transaction)
                             <tr>
                                 <td>{{ $transaction->name }}</td>
-                                <td><a href="{{ action('User\UserMessageController@index', ['item_id' => $transaction->item_id]) }}">詳細</a></td>
+                                <td><a href="{{ action('User\UserMessageController@index', ['item_id' => $transaction->item_id]) }}">{{ $transaction->message }}</a></td>
                                 <td><a href="{{ action('User\UserTransactionController@closeTrade', ['item_id' => $transaction->item_id]) }}">取引を完了する</a></td>
                             </tr>
                             @endforeach
