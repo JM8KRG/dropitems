@@ -22,5 +22,5 @@ interface CategoryInterface
      *
      * @return array|null
      */
-    public function getCategories();
+    public static function getCategories();
 }

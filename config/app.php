@@ -182,6 +182,7 @@ return [
          */
         Barryvdh\Debugbar\ServiceProvider::class,
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
+        \DropItems\Providers\ComposerServiceProvider::class,
 
     ],
 

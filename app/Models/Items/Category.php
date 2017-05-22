@@ -53,7 +53,7 @@ class Category implements CategoryInterface
      *
      * @return array|null
      */
-    public function getCategories()
+    public static function getCategories()
     {
         $result = \DB::connection('mysql')->select('
             SELECT *
