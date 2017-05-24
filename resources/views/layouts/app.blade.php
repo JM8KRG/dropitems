@@ -45,7 +45,7 @@
                         <li><a href="{{ action('Settings\ProfileController@index') }}"><i class="fa fa-cogs" aria-hidden="true"></i> 設定</a></li>
                         <li class="divider"></li>
                         <li><a href="{{ action('Sentinel\LoginController@logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> ログアウト</a></li>
-                        <li class="dropdown-header">ver: 1.00</li>
+                        <li class="dropdown-header">ver: 1.50</li>
                     </ul>
                 </li>
             </ul>
