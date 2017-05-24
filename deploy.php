@@ -22,11 +22,12 @@ server('production', '192.168.1.9', 22)
     ->set('deploy_path', '/home/nishi/nginx/html/dropitems')
     ->pty(true);
 
-//task('storage:link', function() {
-//    run('php artisan storage:link');
-//})->desc('storage:link');;
-//
-//after('storage:link', 'deploy:unlock');
+task('mytask', function() {
+    writeln('<info>php artisan storage:link</info>');
+    run('{{bin/php}} {{release_path}}/artisan storage:link');
+});
+
+after('deploy:unlock', 'mytask');
 
 /**
  * Upload .env.production file as .env
