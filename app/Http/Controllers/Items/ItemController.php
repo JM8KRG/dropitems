@@ -2,6 +2,7 @@
 
 namespace DropItems\Http\Controllers\Items;
 
+use DropItems\Models\Items\Category;
 use DropItems\Models\Items\Item;
 use DropItems\Models\User\User;
 use Illuminate\Http\Request;
@@ -58,6 +59,30 @@ class ItemController extends Controller
         }
 
         return view('item.detail', ['item' => $item, 'use_button' => $button]);
+    }
+
+    /**
+     * カテゴリーIDからアイテム一覧
+     *
+     * @param $category_id
+     */
+    public function showCategoryItems(Request $request)
+    {
+        if (!$request->category_id) {
+            // エラーメッセージ
+            return abort('404', '不正なリクエストです。');
+        }
+
+        // カテゴリー名を取得
+        $category_name = Category::getCategoryNameById($request->category_id);
+
+        // アイテムリストを取得
+        $items = $this->item->getItemsByCategoryId($request->category_id);
+
+        return view('item.category_items', [
+            'category'  => $category_name,
+            'items'     => $items,
+        ]);
     }
 
     /**

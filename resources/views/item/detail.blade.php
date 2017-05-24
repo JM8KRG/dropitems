@@ -23,6 +23,12 @@
                                 <div class="media-body">
                                     <h4 class="media-heading">{{ $item->name }}</h4>
                                     <p>{{ $item->description }}</p>
+                                    <p>カテゴリー：
+                                        <span class="label label-warning">
+                                            <i class="fa fa-tag" aria-hidden="true"></i>
+                                            {{ $item->category }}
+                                        </span>
+                                    </p>
                                     <p>アイテムの状態：{{ $item->condition }}</p>
                                     <p>出品日時：{{ date('Y年n月j日 H時i分', strtotime($item->create_at)) }}</p>
                                     <p>出品者：{{ $item->seller_name }}</p>

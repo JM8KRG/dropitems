@@ -135,6 +135,10 @@ class Item implements ItemInterface {
      */
     public function isExistItem($item_id)
     {
+        if (!$item_id) {
+            return false;
+        }
+
         $result = DB::connection('mysql')->select('SELECT item_id FROM items WHERE item_id = :item_id', [
            'item_id' => $item_id,
         ]);
@@ -160,16 +164,60 @@ class Item implements ItemInterface {
               items.name,
               items.description,
               items.image1
-            FROM
-              items
-              LEFT JOIN transactions
+
+            FROM items
+
+            LEFT JOIN transactions
               USING (item_id)
+
             WHERE status = 0 AND
               transactions.create_at IS NULL
+
             ORDER BY item_id DESC
             LIMIT :limit
         ', [
             'limit' => $limit
+        ]);
+
+        if (!$result) {
+            return null;
+        }
+
+        return $result;
+    }
+
+    /**
+     *  カテゴリーIDからアイテムリストを取得する
+     *
+     * @param $category_id string カテゴリーID
+     * @return array|null
+     */
+    public function getItemsByCategoryId($category_id)
+    {
+        if (!$category_id) {
+            return null;
+        }
+
+        $result = DB::connection('mysql')->select('
+            SELECT
+              items.item_id,
+              items.name,
+              items.description,
+              items.image1
+
+            FROM items
+
+            LEFT JOIN transactions
+              USING (item_id)
+
+            WHERE
+              category_id = :category_id AND
+              status = 0 AND
+              transactions.create_at IS NULL
+
+            ORDER BY item_id DESC
+        ', [
+            'category_id' => $category_id,
         ]);
 
         if (!$result) {

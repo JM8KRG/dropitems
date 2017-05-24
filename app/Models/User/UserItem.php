@@ -40,15 +40,24 @@ class UserItem implements UserItemInterface
               item_conditions.condition,
               item_categories.category,
               items.status
+              
             FROM items
-            INNER JOIN item_conditions ON item_conditions.condition_id = items.condition_id
-            INNER JOIN item_categories ON item_categories.category_id = items.category_id
-            LEFT OUTER JOIN transactions USING (item_id)
+            
+            INNER JOIN item_conditions
+              ON item_conditions.condition_id = items.condition_id
+            
+            INNER JOIN item_categories
+              ON item_categories.category_id = items.category_id
+            
+            LEFT OUTER JOIN transactions
+              USING (item_id)
+            
             WHERE
               user_id  = :user_id AND
               transactions.completed_at IS NULL AND
               (status = 0 OR 
               status = 1)
+              
             ORDER BY items.item_id DESC
               LIMIT :limit
               OFFSET :offset
@@ -213,7 +222,7 @@ class UserItem implements UserItemInterface
                 item_condition_id  = :item_condition_id
             WHERE item_id          = :item_id
             AND user_id            = :user_id
-        ',[
+        ', [
             'item_name'         => $item_name,
             'item_description'  => $item_description,
             'category_id'       => $category_id,

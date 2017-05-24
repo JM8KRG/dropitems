@@ -38,6 +38,9 @@ Route::get('items/detail/{item_id}', 'Items\ItemController@index');
 // 受け取り申請
 Route::post('items/order', 'Items\ItemController@store');
 
+// カテゴリー
+Route::get('category/{category_id}', 'Items\ItemController@showCategoryItems');
+
 // アイテムアップロード
 Route::get('upload', 'User\ItemUploader@index');
 Route::post('upload', 'User\ItemUploader@store');

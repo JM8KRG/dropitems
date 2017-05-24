@@ -30,7 +30,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">カテゴリー <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         @foreach($categories as $category)
-                            <li><a href="#">{{ $category->category }}</a></li>
+                            <li><a href="{{ action('Items\ItemController@showCategoryItems', ['category_id' => $category->category_id]) }}">{{ $category->category }}</a></li>
                         @endforeach
                     </ul>
                 </li>

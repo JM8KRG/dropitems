@@ -23,4 +23,12 @@ interface CategoryInterface
      * @return array|null
      */
     public static function getCategories();
+
+    /**
+     * カテゴリーIDからカテゴリー名を取得する
+     *
+     * @param $category_id string カテゴリーID
+     * @return string
+     */
+    public static function getCategoryNameById($category_id);
 }

@@ -45,4 +45,12 @@ interface ItemInterface {
 
     // アイテムIDから出品情報を取得する
     public function getItem($item_id);
+
+    /**
+     *  カテゴリーIDからアイテムリストを取得する
+     *
+     * @param $category_id string カテゴリーID
+     * @return array|null
+     */
+    public function getItemsByCategoryId($category_id);
 }
