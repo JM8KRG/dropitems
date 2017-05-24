@@ -3,7 +3,7 @@ namespace Deployer;
 require 'recipe/laravel.php';
 
 // Configuration
-
+set('keep_releases', 5);
 set('ssh_type', 'native');
 set('ssh_multiplexing', true);
 
@@ -16,11 +16,17 @@ add('writable_dirs', []);
 
 // Servers
 
-server('production', 'airn.dip.jp', 22)
+server('production', '192.168.1.9', 22)
     ->user('nishi')
     ->identityFile()
     ->set('deploy_path', '/home/nishi/nginx/html/dropitems')
     ->pty(true);
+
+//task('storage:link', function() {
+//    run('php artisan storage:link');
+//})->desc('storage:link');;
+//
+//after('storage:link', 'deploy:unlock');
 
 /**
  * Upload .env.production file as .env
