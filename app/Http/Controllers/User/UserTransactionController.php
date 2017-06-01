@@ -45,7 +45,7 @@ class UserTransactionController extends Controller
         $result = $this->user->getUserTransactionInstance()->closeUserTransaction($item_id, $this->user->getUserId());
 
         if (!$result) {
-            return redirect()->back()->with('danger', '完了処理に失敗しました。');
+            return redirect()->back()->with('danger', '取引の完了処理は出品者のみ可能です。');
         }
 
         return redirect()->action('User\UserTransactionController@index')->with('success', '取引を完了しました。');
